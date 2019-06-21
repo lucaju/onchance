@@ -1,0 +1,17 @@
+<div class='debug'>
+    <b>Action: </b> {{action}}<br />
+    <b>Language: </b>{{languageCode}}<br />
+    <b>Query Text: </b>{{queryText}}<br />
+    {{#if speechRecognitionConfidence}}<b>Speech Recognition Confidence: </b>{{speechRecognitionConfidence}}<br />{{/if}}
+    
+    <b>Intent: </b>{{intent.displayName}}<br />
+    &nbsp;&nbsp;- Confidence: {{intentDetectionConfidence}}<br />
+    &nbsp;&nbsp;- Priority: {{intent.priority}}<br />
+
+    <b>Contexts: </b><br />
+    {{#each outputContexts}}
+    &nbsp;&nbsp;- Lifespan Count: {{lifespanCount}}<br />
+    {{#if parameters}}&nbsp;&nbsp;- Parameters: {{parameters}}<br />{{/if}}
+    {{/each}}
+
+</div>

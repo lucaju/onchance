@@ -1,0 +1,37 @@
+{
+    "home": {
+        "title": "On Chance",
+        "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla.",
+        "startButton": "Start",
+        "headphones": "Better with headphones",
+        "team": {
+            "title": "Authors",
+            "list":
+            [
+                {
+                    "name": "Julia Salles",
+                    "bio": "Julia Salles is a PhD candidate in Communication Studies at Université du Québec à Montréal and a Lecturer at Université de Montréal. She created the edited video of the dance performance, integrating the visuals and sounds produced by Luciano and Samuel. She also worked on developing this web interactive platform, as a way to present the materials in an interactive and non-linear form."
+                },
+                {
+                    "name": "Luciano Frizzera",
+                    "bio": "Luciano Frizzera is a PhD candidate in Communication Studies at Concordia University. He retrieved the Fitbit data generated through Florence’s week of self-tracking – not only those accessible to the Fitbit user, but more extensively, those produced, collected and archived by Fitbit. He also worked on creating the visualizations, producing data-driven graphs, that aim to get rid of any linearity or consistency afforded by Fitbit to its user."
+                }
+            ]
+        },
+        "sponsors": {
+            "title": "Sponsors",
+            "list":
+            [
+                {
+                    "name": "Sponsor 1",
+                    "logo": "logo.png"
+                },
+                {
+                    "name": "Sponsor 1",
+                    "logo": "logo.png"
+                }
+            
+            ]
+        }
+    }
+}

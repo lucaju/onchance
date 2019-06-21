@@ -1,0 +1,25 @@
+<div class='debug'>
+    <b>Source: </b> {{source}}<br />
+    <b>Act: </b>{{act}}<br />
+    <b>Language: </b>{{language}}<br />
+    <b>Processing Language: </b>{{processing_language}}<br />
+    <b>Sentiment: </b>{{sentiment}}<br />
+    {{#if type}}<b>Type: </b>{{type}}<br />{{/if}}
+
+    <b>Intents: </b><br />
+    {{#each intents}}
+    &nbsp;&nbsp;- <b>{{slug}}</b><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;- confidence: {{confidence}}<br />
+    {{/each}}
+
+    {{#if entitiesArray}}
+    <b>Entities:</b> <br />
+    {{#each entitiesArray}}
+    &nbsp;&nbsp;- <b>{{name}}: </b><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;- {{raw}}<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;- confidence: {{confidence}}<br />
+    {{/each}}
+    {{/if}}
+
+    <b>Timestamp:</b><br />{{timestamp}}<br />
+</div>
