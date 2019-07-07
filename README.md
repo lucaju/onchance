@@ -5,7 +5,7 @@ chatbot driven web doc
 
 From the uncertainty about the weather to the choices we make at the supermarket, chance is constantly affecting our lives. But if we could have more data and develop more precise models and algorithms, could we predict and control future events? On Chance is a documentary chatbot exploring the philosophy and science of randomness. Have a chat about how randomness affects our lives and explore the notion of chance through conversations, movie scenes, archive material and original interviews.
 
-Try out here:(onchance.net/)https://onchance.net/
+Try out here: https://onchance.net/
 
 ## Who developed?
 
