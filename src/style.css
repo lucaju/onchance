@@ -1,258 +1,258 @@
 @import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap');
 
 body {
-  margin: 0;
-  /* background: #000; */
-  background: #263238;
-  /* font-family: 'Josefin Sans', sans-serif; */
+	margin: 0;
+	/* background: #000; */
+	background: #263238;
+	/* font-family: 'Josefin Sans', sans-serif; */
 }
 
 #title {
-  color: yellow;
+	color: yellow;
 }
 
 .font-share-tech-mono {
-  font-family: 'Share Tech Mono', monospace !important;
+	font-family: 'Share Tech Mono', monospace !important;
 }
 
 
 #main.row {
-  margin-bottom: 0px !important;
-  overflow: hidden;
+	margin-bottom: 0px !important;
+	overflow: hidden;
 }
 
 #side-bar {
-  padding-left: 0px !important;
+	padding-left: 0px !important;
 }
 
 .border-circle {
-  border-color:#666666 !important;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 50%;
+	border-color:#666666 !important;
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 50%;
 }
 
 /* Conversation */
 
 #conversation-wrapper {
-    margin:auto;
-    width: 100%;
-    /*border: none;*/
-    /*height: 800px;*/
-    /*overflow-y: hidden;*/
-    overflow:auto;
-    /* height: 800px; */
-    /* height: 100%; */
-    overflow: scroll;
+		margin:auto;
+		width: 100%;
+		/*border: none;*/
+		/*height: 800px;*/
+		/*overflow-y: hidden;*/
+		overflow:auto;
+		/* height: 800px; */
+		/* height: 100%; */
+		overflow: scroll;
 }
 
 #conversation { 
-  padding-top: 30px;
-  padding-left: 10px;
-  padding-right: 10px;
-  overflow-y: auto;
+	padding-top: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
+	overflow-y: auto;
 }
 
 .dialog {
-  clear: both;
+	clear: both;
 }
 
 .balloon {
-  padding: 10px;
-  border-radius: 10px;
-  max-width: 80%;
-  margin-bottom: 10px;
-  overflow: hidden;
-  margin-top: 7px;
+	padding: 10px;
+	border-radius: 10px;
+	max-width: 80%;
+	margin-bottom: 10px;
+	overflow: hidden;
+	margin-top: 7px;
 
-  /* These are technically the same, but use both */
-  overflow-wrap: break-word;
-  word-wrap: break-word;
+	/* These are technically the same, but use both */
+	overflow-wrap: break-word;
+	word-wrap: break-word;
 }
 
 .md-dark {
-  color: rgba(0, 0, 0, 0.54);
+	color: rgba(0, 0, 0, 0.54);
 }
 
 .md-light {
-  color: rgba(255, 255, 255, 1);
+	color: rgba(255, 255, 255, 1);
 }
 
 
 .human {
-   border-top-right-radius: 0px;
-   float: right;
-   background-color: #cfd8dc;
+	border-top-right-radius: 0px;
+	float: right;
+	background-color: #cfd8dc;
 }
 
 .bot {
-  float: left;
-  border-top-left-radius: 0px;
-  background-color: #e1bee7;
+	float: left;
+	border-top-left-radius: 0px;
+	background-color: #e1bee7;
 }
 
 .balloon-left {
-  float: left;
-  border-top-left-radius: 0px;
-  background-color: #e1bee7;
+	float: left;
+	border-top-left-radius: 0px;
+	background-color: #e1bee7;
 }
 
 .balloon-right {
-  border-top-right-radius: 0px;
-  float: right;
-  background-color: #cfd8dc;
+	border-top-right-radius: 0px;
+	float: right;
+	background-color: #cfd8dc;
 }
 
 .balloon-home {
-  max-width: 60%;
+	max-width: 80%;
 }
 
 .balloon.about {
-  /* float: left; */
-  max-width: 100% !important;
-  border-radius: 0px !important;
+	/* float: left; */
+	max-width: 100% !important;
+	border-radius: 0px !important;
 }
 
 .quick-reply {
-  clear: both;
-  width: 100%;
-  margin-top: 10px;
-  text-align: center;
+	clear: both;
+	width: 100%;
+	margin-top: 10px;
+	text-align: center;
 }
 
 
 /* Bot typiong time */
 
 .spinner {
-  margin: auto 0;
-  width: 30px;
-  text-align: center;
+	margin: auto 0;
+	width: 30px;
+	text-align: center;
 }
 
 .spinner > div {
-  width: 4px;
-  height: 4px;
-  background-color:rgba(0, 0, 0, .8);
+	width: 4px;
+	height: 4px;
+	background-color:rgba(0, 0, 0, .8);
 
-  border-radius: 100%;
-  display: inline-block;
-  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+	border-radius: 100%;
+	display: inline-block;
+	-webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+	animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 }
 
 .spinner .bounce1 {
-  -webkit-animation-delay: -0.32s;
-  animation-delay: -0.32s;
+	-webkit-animation-delay: -0.32s;
+	animation-delay: -0.32s;
 }
 
 .spinner .bounce2 {
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
+	-webkit-animation-delay: -0.16s;
+	animation-delay: -0.16s;
 }
 
 @-webkit-keyframes sk-bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0) }
-  40% { -webkit-transform: scale(1.0) }
+	0%, 80%, 100% { -webkit-transform: scale(0) }
+	40% { -webkit-transform: scale(1.0) }
 }
 
 @keyframes sk-bouncedelay {
-  0%, 80%, 100% { 
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  } 40% { 
-    -webkit-transform: scale(1.0);
-    transform: scale(1.0);
-  }
+	0%, 80%, 100% { 
+		-webkit-transform: scale(0);
+		transform: scale(0);
+	} 40% { 
+		-webkit-transform: scale(1.0);
+		transform: scale(1.0);
+	}
 }
 
 /* Bot debug */
 .debug {
-  clear: both;
-  background-color: rgba(255, 255, 255, .2);
-  color: #FDFDFD;
-  font-size: 0.7rem;
-  margin-left: 24px;
+	clear: both;
+	background-color: rgba(255, 255, 255, .2);
+	color: #FDFDFD;
+	font-size: 0.7rem;
+	margin-left: 24px;
 
-  padding: 10px;
-  border-radius: 10px;
-  max-width: 80%;
-  margin-bottom: 10px;
+	padding: 10px;
+	border-radius: 10px;
+	max-width: 80%;
+	margin-bottom: 10px;
 }
 
 .debug-button {
-  float: left;
-  margin-left: 5px;
+	float: left;
+	margin-left: 5px;
 }
 
 .debug-icon {
-  font-size: 12px !important;
-  color: #ccc;
-  cursor: pointer;
+	font-size: 12px !important;
+	color: #ccc;
+	cursor: pointer;
 }
 
 
 /*conversation input*/
 #conversation-input {
-  position: fixed;
-  bottom: 0px;
-  background-color: white;
-  width: inherit;
+	position: fixed;
+	bottom: 0px;
+	background-color: white;
+	width: inherit;
 
 }
 
 input {
-  background-color:transparent;
+	background-color:transparent;
 }
 
 textarea:focus {
-  border-bottom-color: #ba68c8 !important;
+	border-bottom-color: #ba68c8 !important;
 }
 
 *:focus {
-    outline: none !important;
+		outline: none !important;
 }
 
 
 /* video */
 .video {
-  margin-left: 0 auto;
-  margin-right: 0 auto;
-  top: 0; right: 0; bottom: 0; left: 0
+	margin-left: 0 auto;
+	margin-right: 0 auto;
+	top: 0; right: 0; bottom: 0; left: 0
 }
 
 * { box-sizing: border-box; }
 
 .video iframe {
-  pointer-events: none;
+	pointer-events: none;
 }
 
 .blur {
- -webkit-filter: blur(5px);
-  -moz-filter: blur(5px);
-  -o-filter: blur(5px);
-  -ms-filter: blur(5px);
-  filter: blur(5px);
+	-webkit-filter: blur(5px);
+	-moz-filter: blur(5px);
+	-o-filter: blur(5px);
+	-ms-filter: blur(5px);
+	filter: blur(5px);
 }
 
 @font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');
+	font-family: 'Material Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url(https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');
 }
 
 .material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
+	font-family: 'Material Icons';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 24px;
+	line-height: 1;
+	letter-spacing: normal;
+	text-transform: none;
+	display: inline-block;
+	white-space: nowrap;
+	word-wrap: normal;
+	direction: ltr;
+	-webkit-font-feature-settings: 'liga';
+	-webkit-font-smoothing: antialiased;
 }
