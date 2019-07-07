@@ -10,10 +10,10 @@ Try out here:(onchance.net/)https://onchance.net/
 ## Who developed?
 
 ### Julia Salles
-PhD candidate in Communication Studies at Université du Québec à Montréal and a Lecturer at Université de Montréal. (mailto:juliacsalles@yahoo.com.br)juliacsalles@yahoo.com.br
+PhD candidate in Communication Studies at Université du Québec à Montréal and a Lecturer at Université de Montréal. juliacsalles@yahoo.com.br
 
 ### Luciano Frizzera
-PhD candidate in Communication Studies at Concordia University. (mailto:lucaju@gmail.com)lucaju@gmail.com
+PhD candidate in Communication Studies at Concordia University. lucaju@gmail.com
 
 ## Tell me more about the project
 
