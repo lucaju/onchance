@@ -1,27 +1,43 @@
-const sendDialog = (msg) => {
+const sendDialog = async msg => {
 
 	const body = {msg};
 
-	return new Promise((resolve, reject) => {
-		fetch('/dialogflow',{
+	try {
+
+		const response = await fetch('/dialogflow',{
 			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
+			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(body),
-		}).then(res => {
-			return res.json();
-		}).then(data => {
-			// console.log(data);
-			resolve(data);
-		}).catch((err) => {
-			console.log(err);
-			reject(err);
 		});
-	});
+
+		const json = await response.json();
+		return json;
+
+	} catch (err) {
+		console.log(err);
+		return err;
+	}
+
+	// return new Promise((resolve, reject) => {
+	// 	fetch('/dialogflow',{
+	// 		method: 'POST',
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		body: JSON.stringify(body),
+	// 	}).then(res => {
+	// 		return res.json();
+	// 	}).then(data => {
+	// 		// console.log(data);
+	// 		resolve(data);
+	// 	}).catch((err) => {
+	// 		console.log(err);
+	// 		reject(err);
+	// 	});
+	// });
 };
 
-const getSimplifiedLastDialog = (data) => {
+const getSimplifiedLastDialog = data => {
 
 	let msgConcat = '';
 	for (const item of data.messages) {
@@ -43,7 +59,7 @@ const getSimplifiedLastDialog = (data) => {
 
 };
 
-const getDebug = (data) => {
+const getDebug = data => {
 	return data;
 };
 

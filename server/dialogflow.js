@@ -9,7 +9,7 @@ let contexts = [];
  * Send a query to the dialogflow agent, and return the query result.
  * @param {string} projectId The project to be used
  */
-const sendDialog = async (msg) => {
+const sendDialog = async msg => {
 
 	// A unique identifier for the given session
 	const sessionId = uuidv4();
@@ -69,11 +69,13 @@ const sendDialog = async (msg) => {
 	dialogResult.subjects = [];
 
 	if (contexts.length > 0) {
-		dialogResult.subject = [];
+		dialogResult.subjects = [];
 		// console.log(context)
 		for (const context of contexts) {
 			if (context.parameters) {
-				dialogResult.subjects.push(context.parameters.fields.subject.stringValue);
+				if (context.parameters.fields.subject) {
+					dialogResult.subjects.push(context.parameters.fields.subject.stringValue);
+				}
 			}
 		}
 	}

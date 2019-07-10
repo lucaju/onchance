@@ -15,7 +15,7 @@ const analyzer = new Analyzer('English', stemmer, 'afinn');
 
 const watchedCollection = [];
 
-const getVideo = (conversation) => {
+const getVideo = conversation => {
 
 	const videoBasedOnSubject = getVideoBySubject(conversation.bot);
 	// const videoBasedOnSentiment = getVideoBySentiment(conversation.user);
@@ -27,7 +27,7 @@ const getVideo = (conversation) => {
 
 };
 
-const getVideoBySubject = (bot) => {
+const getVideoBySubject = bot => {
 
 	if (bot.subjects.length == 0) {
 		return {
@@ -60,7 +60,7 @@ const getVideoBySubject = (bot) => {
 	return selectedVideo;
 };
 
-const getVideoBySentiment = (msg) => {
+const getVideoBySentiment = msg => {
 
 	//sentiment amnalysis
 	const tokens = tokenizer.tokenize(msg.text);
@@ -90,7 +90,7 @@ const getVideoBySentiment = (msg) => {
 	return selectedVideo;
 };
 
-const getVideoByKeyword = (msg) => {
+const getVideoByKeyword = msg => {
 
 	//sentiment amnalysis
 	const tokens = tokenizer.tokenize(msg.text);

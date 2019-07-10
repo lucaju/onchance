@@ -5,7 +5,7 @@ import recastConfig from './../../credentials/recast.ai.credentials.json';
 let conversationID = null;
 
 //Send and get data to/from Recast
-export const sendDialog = (msg) => {
+export const sendDialog = async msg => {
 
 	//prepare data to send
 	if (conversationID == null) conversationID = getRandomInt(999999);
@@ -26,31 +26,28 @@ export const sendDialog = (msg) => {
 	const headers = {
 		'Content-Type': 'application/json',
 		'Accept': 'application/json',
-		// 'Authorization': 'Token cec759081523e1b5de6efe181a58a5d6'
+		'Authorization': recastConfig.credentials.developer.Authorization
 	};
 
-	headers['Authorization'] = recastConfig.credentials.developer.Authorization;
+	try {
 
-
-	return new Promise((resolve, reject) => {
-		fetch(recastConfig.endPoints.DIALOG, {
+		const response = await fetch(recastConfig.endPoints.DIALOG, {
 			method: 'POST',
 			headers: headers,
 			body: JSON.stringify(dialog),
-		}).then(res => {
-			return res.json();
-		}).then(data => {
-			// console.log(data);
-			resolve(data);
-		}).catch((err) => {
-			console.log(err);
-			reject(err);
 		});
-	});
+
+		const json = await response.json();
+		return json;
+
+	} catch (err) {
+		console.log(err);
+		return err;
+	}
 
 };
 
-export const getSimplifiedLastDialog = (data) => {
+export const getSimplifiedLastDialog = data => {
 
 	let msgConcat = '';
 	for (const item of data.results.messages) {
@@ -72,7 +69,7 @@ export const getSimplifiedLastDialog = (data) => {
 
 };
 
-export const getDebug = (data) => {
+export const getDebug = data => {
 
 	//get information
 	const nlp = data.results.nlp;

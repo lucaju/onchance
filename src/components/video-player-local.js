@@ -1,4 +1,6 @@
 import videojs from 'video.js';
+import {sendDialog} from './conversation';
+import {getCurrentSubject} from '../memory';
 import 'video.js/dist/video-js.css';
 
 let player;
@@ -19,14 +21,11 @@ export const stop = () => {
 	player.pause();
 };
 
-export const play = (video) => {
+export const play = video => {
 	stop();
 	player.src(`http://onchance.net/videos/${video.fileName}`);
-
-	// player.src(`videos/${video.fileName}`);
 	
-	
-	player.ready(() => {
+	player.ready( () => {
 		player.play()
 			.then(() => {
 				// console.log('yep');
@@ -37,8 +36,7 @@ export const play = (video) => {
 	});
 
 	
-
-	//this should be part of the meetada 
+	//this should be part of the metadata 
 	const tags = [
 		{
 			time: 5,
@@ -77,6 +75,7 @@ export const play = (video) => {
 	player.on('ended', () => {
 		// player.muted(false);
 		$('body').trigger(eventEnd);
+		if (getCurrentSubject() != '') sendDialog(getCurrentSubject());
 	});
 
 };

@@ -1,17 +1,16 @@
 import $ from 'jquery';
-import YTPlayer from './video-player-youtube';
+// import YTPlayer from './video-player-youtube';
 // import localPlayer from './video-player-local';
-
 import videoCollection from'../../server/assets/video-collection.json';
 
-
 const playerService = 'localPlayer'; // 'youtube' || 'localPlayer'
-let player ;
+let player;
 let localPlayer;
 
 export const initiate = async () => {
 
 	if (playerService == 'youtube') {
+		if(!YTPlayer) YTPlayer = await import(/* webpackChunkName: "YTPlayer" */ './video-player-youtube');
 		player = YTPlayer;
 		$('#local-player').hide();
 		player.initiate();
@@ -23,18 +22,10 @@ export const initiate = async () => {
 		player.initiate();
 
 		selectRandomVideo();
-
-
-		// await import('./local-player')
-		// 	.then(({ default: localPlayer }) => {
-		// 		player = localPlayer;
-		// 		$('#player').hide();
-		// 		player.initiate();
-		// 	})
 	}
 
 
-	$('body').on('botResponse', (e) => {
+	$('body').on('botResponse', e => {
 		changeVideo(e.videoData);
 	});
 
@@ -49,6 +40,6 @@ const selectRandomVideo = async () => {
 	
 }
 
-const changeVideo = (videoData) => {
+const changeVideo = videoData => {
 	player.play(videoData);
 };

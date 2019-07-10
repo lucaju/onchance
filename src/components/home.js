@@ -17,6 +17,10 @@ const render = () => {
 		start();
 	});
 
+	$('#title').on('click', () => {
+		start();
+	});
+
 	$('body').keypress(e => {
 		if (e.which == 32 && home) {
 			event.preventDefault();

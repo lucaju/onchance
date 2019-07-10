@@ -16,6 +16,8 @@ export const render = () => {
 	addInteraction();
 	toggleDarkMode();
 
+	
+
 };
 
 const addInteraction = () => {

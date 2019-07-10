@@ -1,15 +1,15 @@
 import $ from 'jquery';
 import Timer from 'tiny-timer';
 
-import dialogFlow from './bot-dialogflow.js';
-// import recastAI from './bot-recastai.js';
+import dialogFlow from './bot-dialogflow';
+// import recastAI from './bot-recastai';
 
 import ballonUserHBS from './ballon-user.hbs';
 import ballonBotHBS from './ballon-bot.hbs';
 import ballonAboutHBS from './ballon-about.hbs';
 import botDialogflowIDebugHBS from './debug-dialogflow-dialog.hbs';
+import {getCurrentSubject, setCurrentSubject} from '../memory';
 // import botRecastaiDebugHBS from './debug-recastai-dialog.hbs';
-
 
 //---------
 
@@ -57,7 +57,7 @@ const addBotSelectorInteraction = () => {
 	});
 };
 
-const selectBot = async (botName) => {
+const selectBot = async botName => {
 	botService = botName;
 
 	//choose bootservice
@@ -79,7 +79,7 @@ const botFirstinteraction = () => {
 	}, timeFirstInteraction);
 };
 
-export const userInput = (msg) => {
+export const userInput = msg => {
 	// stop timer for first interaction if the user start to type
 	// if (bot.firstInteraction) clearTimeout(firstInteraction);
 
@@ -89,7 +89,7 @@ export const userInput = (msg) => {
 	return false;
 };
 
-export const setDarkMode = (value) => {
+export const setDarkMode = value => {
 	darkMode = value;
 };
 
@@ -114,7 +114,7 @@ const addAboutDialog = () => {
 
 };
 
-const addUserDialog = (msg) => {
+const addUserDialog = msg => {
 
 	const icon = 'account_circle';
 	let iconColor = 'md-dark';
@@ -137,11 +137,9 @@ const addUserDialog = (msg) => {
 };
 
 //Send and get data to/from recastAI
-const sendDialog = async (msg) => {
+export const sendDialog = async msg => {
 
 	const dialogData = await bot.sendDialog(msg);
-	const videoData = await getVideo(dialogData);
-	// console.log(dialogData);
 
 	let messages;
 	if (botService == 'RecastAI') {
@@ -170,41 +168,58 @@ const sendDialog = async (msg) => {
 			delay = typing;
 		}
 
-		if(!videoData.error) dispatchVideo(videoData, typing);
+		const videoData = await getVideo(dialogData);
+		if(videoData) dispatchVideo(videoData, typing);
 
 	}
 
 };
 
-const getVideo = async (dialogData) => {
+const getVideo = async dialogData => {
 
-	return new Promise((resolve, reject) => {
+	if (dialogData.subjects.length == 0) return null;
 
-		if (!dialogData) reject(new Error('No data'));
+	setCurrentSubject(dialogData.subjects[0]);
 
-		const body = bot.getSimplifiedLastDialog(dialogData)
+	// return new Promise((resolve, reject) => {
 
-		fetch('/getVideo',{
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(body),
-		}).then(res => {
-			return res.json();
-		}).then(data => {
-			// console.log(data);
-			resolve(data);
-		}).catch((err) => {
-			console.log(err);
-			// reject(err);
-		});
+	// if (!dialogData) reject(new Error('No data'));
+
+	const body = bot.getSimplifiedLastDialog(dialogData)
+
+	const response = await fetch('/getVideo',{
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(body),
 	});
+
+	const json = await response.json();
+
+	return json;
+
+
+	await fetch('/getVideo',{
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(body),
+	}).then(res => {
+		return res.json();
+	}).then(data => {
+		// console.log(data);
+		return data;
+	}).catch((err) => {
+		console.log(err);
+		// reject(err);
+	});
+	
+	// });
 };
 
 
 //get bot typying time
-const getBotTypingTime = (text) => {
+const getBotTypingTime = text => {
 	let initialDelay = Math.random(.1, 1) * 1000; //random between 300ms and 1 s
 	let charDelay = text.length * 20; // number of characters * 20 ms
 	return initialDelay + charDelay;
@@ -305,7 +320,7 @@ const saveLog = (agent, data) => {
 };
 
 //debug to screen
-const debugButtonEvent = async (event) => {
+const debugButtonEvent = async event => {
 
 	const targetDialog = $(event.data);
 

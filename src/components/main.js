@@ -1,4 +1,4 @@
-import nav from './top-nav-bar';
+// import nav from './top-nav-bar';
 import sidebar from './sidebar';
 import video from './video-view-port';
 
@@ -40,6 +40,9 @@ const introFullScreen = () => {
 		}, 3000);
 
 		$('body').off('video-ended');
+
+		$('textarea').focus();
+		
 	});
 
 };
