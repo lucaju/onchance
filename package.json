@@ -1,6 +1,6 @@
 {
 	"name": "onchance",
-	"version": "1.1.1",
+	"version": "1.2.0",
 	"description": "chatbot driven web doc",
 	"author": {
 		"name": "Luciano Frizzera",
@@ -36,10 +36,10 @@
 		"body-parser": "^1.19.0",
 		"dialogflow": "^0.10.2",
 		"express": "^4.17.1",
-		"googleapis": "^40.0.1",
+		"googleapis": "^41.0.1",
 		"handlebars": "^4.1.2",
 		"jquery": "^3.4.1",
-		"lodash": "^4.17.13",
+		"lodash": "^4.17.14",
 		"material-icons": "^0.3.1",
 		"materialize-css": "^1.0.0",
 		"natural": "^0.6.3",
@@ -61,14 +61,14 @@
 		"html-webpack-template": "^6.2.0",
 		"image-webpack-loader": "^5.0.0",
 		"jsonfile": "^5.0.0",
-		"mini-css-extract-plugin": "^0.7.0",
+		"mini-css-extract-plugin": "^0.8.0",
 		"nodemon": "^1.19.1",
 		"simple-excel-to-json": "^2.2.0",
 		"style-loader": "^0.23.1",
 		"url-loader": "^2.0.1",
-		"webpack": "^4.35.3",
+		"webpack": "^4.36.1",
 		"webpack-bundle-analyzer": "^3.3.2",
-		"webpack-cli": "^3.3.5",
+		"webpack-cli": "^3.3.6",
 		"webpack-dev-server": "^3.7.2",
 		"webpackbar": "^3.2.0"
 	}
