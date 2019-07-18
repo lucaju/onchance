@@ -30,7 +30,8 @@
 		"dev": "nodemon index.js",
 		"webpackServer": "webpack-dev-server --open",
 		"watch": "webpack --watch",
-		"production": "webpack --mode production --config webpack.production.config.js -p --progress"
+		"production": "webpack --mode production --config webpack.production.config.js -p --progress",
+		"updateVideoCollection": "node server/util/update-video-collection.js"
 	},
 	"dependencies": {
 		"body-parser": "^1.19.0",

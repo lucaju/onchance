@@ -18,6 +18,7 @@ const sendDialog = async msg => {
 	const sessionClient = new dialogflow.SessionsClient({
 		keyFilename: './credentials/google-dialogflow-Loto-Documentary-5ebc6370765e.json',
 	});
+	
 	const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
 	// The text query request.

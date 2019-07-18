@@ -5,58 +5,53 @@ const jsonfile = require('jsonfile');
 const folder = './server/assets/';
 
 
-const getCollection = async () => {
+(async function getCollection() {
 
-	return new Promise(async (resolve, reject) => {
+	try {
+		const auth = await googleAuth.getCrendentials();
+		const collection = await getGoogleSpreadsheet(auth);
 
-		try {
-			const auth = await googleAuth.getCrendentials();
-			const collection = await getGoogleSpreadsheet(auth);
-			// console.log(collection);
-			resolve(collection);
-		} catch (err) {
-			reject(err);
-		}
+		console.log(collection);
 
-	});
+		return collection;
 
-};
+	} catch (err) {
+		console.log(err);
+		throw new Error(err);
+	}
 
-getCollection();
+
+})();
+
 
 
 const getGoogleSpreadsheet = async auth => {
 
-	return new Promise(async (resolve, reject) => {
+	const sheets = google.sheets({
+		version: 'v4',
+		auth
+	});
 
-		const sheets = google.sheets({
-			version: 'v4',
-			auth
+	try {
+
+		const res = await sheets.spreadsheets.values.get({
+			spreadsheetId: '1vp2Nrd2L6YnFmIFg2AmJct4E3JFRbj3Uu_KumhZFgkQ',
+			range: 'Video Collection!A1:N',
 		});
 
-		try {
-			const res = await sheets.spreadsheets.values.get({
-				spreadsheetId: '1vp2Nrd2L6YnFmIFg2AmJct4E3JFRbj3Uu_KumhZFgkQ',
-				range: 'Video Collection!A1:N',
-			});
+		const rows = res.data.values;
+		
+		if (!rows.length) return console.log('No data found.');
 
-			// console.log(res.data.values);
+		const collection = parse(rows);
 
-			const rows = res.data.values;
-			
-			if (!rows.length) {
-				return console.log('No data found.');
-			}
-
-			const collection = parse(rows);
-			resolve (collection);
+		return collection;
 
 
-		} catch (err) {
-			reject('The API returned an error: ' + err);
-		}
-
-	});
+	} catch (err) {
+		console.log('The API returned an error: ' + err);
+		throw new Error(err);
+	}
 
 };
 
@@ -88,17 +83,19 @@ const parse = data => {
 
 	function explodeArray(str, sep) {
 
-		str = str.trim();
+		if(str) {
 
-		const arr = str.split(sep); //explore
+			str = str.trim();
+			const arr = str.split(sep); //explore
 
-		//remove empty slots
-		for (let i = 0; i <= arr.length-1; i++) {
-			arr[i] = arr[i].trim();
-			if (arr[i] == '') arr.splice(i, 1);
+			//remove empty slots
+			for (let i = 0; i <= arr.length-1; i++) {
+				arr[i] = arr[i].trim();
+				if (arr[i] == '') arr.splice(i, 1);
+			}
+
+			return arr;
 		}
-
-		return arr;
 	}
 
 	const metadata = {
@@ -139,20 +136,16 @@ const extractMetadata = (data, feature) => {
 	}
 
 	list.sort();
-	console.log(list)
 	return list;
 };
 
-const saveJson = (data, fileName) => {
-	return new Promise(
-		async (resolve) => {
-			//Save Json file
-			await jsonfile.writeFile(`${folder}/${fileName}`, data, {
-				spaces: 4
-			});
-			//continue
-			resolve();
-		});
+const saveJson = async (data, fileName) => {
+
+	//Save Json file
+	await jsonfile.writeFile(`${folder}/${fileName}`, data, { spaces: 4 });
+
+	//continue
+	return;
 };
 
-exports.getCrendentials = getCollection;
+// exports.getCrendentials = getCollection;
