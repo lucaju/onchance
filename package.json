@@ -1,76 +1,80 @@
 {
-	"name": "onchance",
-	"version": "1.2.0",
-	"description": "chatbot driven web doc",
-	"author": {
-		"name": "Luciano Frizzera",
-		"email": "lucaju@gmail.com",
-		"url": "http://luciano.fluxo.art.br"
-	},
-	"contributors": [
-		{
-			"name": "Julia Salles",
-			"email": "juliacsalles@yahoo.com.br"
-		}
-	],
-	"license": "CC-BY-NC-4.0",
-	"keywords": [
-		"webdoc",
-		"documentary",
-		"chatbot",
-		"chance",
-		"randomness"
-	],
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/lucaju/onchance"
-	},
-	"scripts": {
-		"start": "node index.js",
-		"dev": "nodemon index.js",
-		"webpackServer": "webpack-dev-server --open",
-		"watch": "webpack --watch",
-		"production": "webpack --mode production --config webpack.production.config.js -p --progress",
-		"updateVideoCollection": "node server/util/update-video-collection.js"
-	},
-	"dependencies": {
-		"body-parser": "^1.19.0",
-		"dialogflow": "^0.10.3",
-		"express": "^4.17.1",
-		"googleapis": "^41.0.1",
-		"handlebars": "^4.2.0",
-		"jquery": "^3.4.1",
-		"lodash": "^4.17.15",
-		"material-icons": "^0.3.1",
-		"materialize-css": "^1.0.0",
-		"natural": "^0.6.3",
-		"tiny-timer": "^1.4.0",
-		"uikit": "^3.2.0",
-		"uuid": "^3.3.3",
-		"video.js": "^7.6.0",
-		"youtube-player": "^5.5.2"
-	},
-	"devDependencies": {
-		"clean-webpack-plugin": "^3.0.0",
-		"copy-webpack-plugin": "^5.0.4",
-		"css-loader": "^3.2.0",
-		"eslint": "^6.3.0",
-		"file-loader": "^4.2.0",
-		"handlebars-loader": "^1.7.1",
-		"html-loader": "^0.5.5",
-		"html-webpack-plugin": "^3.2.0",
-		"html-webpack-template": "^6.2.0",
-		"image-webpack-loader": "^5.1.0",
-		"jsonfile": "^5.0.0",
-		"mini-css-extract-plugin": "^0.8.0",
-		"nodemon": "^1.19.2",
-		"simple-excel-to-json": "^2.2.1",
-		"style-loader": "^1.0.0",
-		"url-loader": "^2.1.0",
-		"webpack": "^4.40.0",
-		"webpack-bundle-analyzer": "^3.5.0",
-		"webpack-cli": "^3.3.8",
-		"webpack-dev-server": "^3.8.0",
-		"webpackbar": "^4.0.0"
-	}
+  "name": "onchance",
+  "version": "1.2.0",
+  "description": "chatbot driven web doc",
+  "author": {
+    "name": "Luciano Frizzera",
+    "email": "lucaju@gmail.com",
+    "url": "http://luciano.fluxo.art.br"
+  },
+  "contributors": [
+    {
+      "name": "Julia Salles",
+      "email": "juliacsalles@yahoo.com.br"
+    }
+  ],
+  "license": "CC-BY-NC-4.0",
+  "keywords": [
+    "webdoc",
+    "documentary",
+    "chatbot",
+    "chance",
+    "randomness"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucaju/onchance"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "webpackServer": "webpack-dev-server --open",
+    "watch": "webpack --watch",
+    "production": "webpack --mode production --config webpack.production.config.js -p --progress",
+    "updateVideoCollection": "node server/util/update-video-collection.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dialogflow": "^0.10.3",
+    "express": "^4.17.1",
+    "googleapis": "^41.0.1",
+    "handlebars": "^4.2.0",
+    "jquery": "^3.4.1",
+    "lodash": "^4.17.15",
+    "material-icons": "^0.3.1",
+    "materialize-css": "^1.0.0",
+    "natural": "^0.6.3",
+    "tiny-timer": "^1.4.0",
+    "uikit": "^3.2.0",
+    "uuid": "^3.3.3",
+    "video.js": "^7.6.0",
+    "youtube-player": "^5.5.2",
+    "snyk": "^1.230.5"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.4",
+    "css-loader": "^3.2.0",
+    "eslint": "^6.3.0",
+    "file-loader": "^4.2.0",
+    "handlebars-loader": "^1.7.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-template": "^6.2.0",
+    "image-webpack-loader": "^5.1.0",
+    "jsonfile": "^5.0.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "nodemon": "^1.19.2",
+    "simple-excel-to-json": "^2.2.1",
+    "style-loader": "^1.0.0",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.40.0",
+    "webpack-bundle-analyzer": "^3.5.0",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0",
+    "webpackbar": "^4.0.0"
+  },
+  "snyk": true
 }
