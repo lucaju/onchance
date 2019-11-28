@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import Timer from 'tiny-timer';
+// import Timer from 'tiny-timer';
 
 import dialogFlow from './bot-dialogflow';
 // import recastAI from './bot-recastai';
@@ -257,18 +257,22 @@ const addBotDialog = (data, message, delay, typingTime) => {
 
 	autoScroll();
 
-
-	const timer = new Timer();
-	// timer.on('tick', (ms) => {
-	// console.log(ms);
-	// });
-
-	timer.on('done', () => {
+	setTimeout(() =>{
 		$('#spinner').remove();
 		putBotmessage(balloon, message);
-	});
-	//start timer
-	timer.start(typingTime, 1000); // run for 5 seconds
+	}, 1000)
+
+	// const timer = new Timer();
+	// // timer.on('tick', (ms) => {
+	// // console.log(ms);
+	// // });
+
+	// timer.on('done', () => {
+	// 	$('#spinner').remove();
+	// 	putBotmessage(balloon, message);
+	// });
+	// //start timer
+	// timer.start(typingTime, 1000); // run for 5 seconds
 
 
 	//add bot response message 
