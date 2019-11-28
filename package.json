@@ -63,7 +63,7 @@
 		"image-webpack-loader": "^5.1.0",
 		"jsonfile": "^5.0.0",
 		"mini-css-extract-plugin": "^0.8.0",
-		"nodemon": "^1.19.4",
+		"nodemon": "^2.0.1",
 		"simple-excel-to-json": "^2.2.1",
 		"style-loader": "^1.0.0",
 		"url-loader": "^2.3.0",
