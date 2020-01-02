@@ -8,7 +8,7 @@ import ballonUserHBS from './ballon-user.hbs';
 import ballonBotHBS from './ballon-bot.hbs';
 import ballonAboutHBS from './ballon-about.hbs';
 import botDialogflowIDebugHBS from './debug-dialogflow-dialog.hbs';
-import {getCurrentSubject, setCurrentSubject} from '../memory';
+import {getCurrentSubject, setCurrentSubject} from './memory';
 // import botRecastaiDebugHBS from './debug-recastai-dialog.hbs';
 
 //---------
@@ -61,10 +61,10 @@ const selectBot = async botName => {
 	botService = botName;
 
 	//choose bootservice
-	if (botService == 'RecastAI') {
+	if (botService === 'RecastAI') {
 		if(!recastAI) recastAI  = await import(/* webpackChunkName: "recastAI" */ './bot-recastai.js');
 		bot = recastAI; 
-	} else if (botService == 'DialogFlow') {
+	} else if (botService === 'DialogFlow') {
 		bot = dialogFlow;
 	}
 
@@ -197,24 +197,6 @@ const getVideo = async dialogData => {
 
 	return json;
 
-
-	await fetch('/getVideo',{
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(body),
-	}).then(res => {
-		return res.json();
-	}).then(data => {
-		// console.log(data);
-		return data;
-	}).catch((err) => {
-		console.log(err);
-		// reject(err);
-	});
-	
-	// });
 };
 
 

@@ -18,23 +18,6 @@ const sendDialog = async msg => {
 		return err;
 	}
 
-	// return new Promise((resolve, reject) => {
-	// 	fetch('/dialogflow',{
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		body: JSON.stringify(body),
-	// 	}).then(res => {
-	// 		return res.json();
-	// 	}).then(data => {
-	// 		// console.log(data);
-	// 		resolve(data);
-	// 	}).catch((err) => {
-	// 		console.log(err);
-	// 		reject(err);
-	// 	});
-	// });
 };
 
 const getSimplifiedLastDialog = data => {
