@@ -22,7 +22,7 @@ const render = () => {
 	});
 
 	$('body').keypress(e => {
-		if (e.which == 32 && home) {
+		if (e.which === 32 && home === true) {
 			event.preventDefault();
 			home = false;
 			start();
