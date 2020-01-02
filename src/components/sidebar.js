@@ -16,8 +16,6 @@ export const render = () => {
 	addInteraction();
 	toggleDarkMode();
 
-	
-
 };
 
 const addInteraction = () => {
@@ -35,7 +33,6 @@ const addInteraction = () => {
 			conversation.userInput(msg);
 		}
 	});
-
 
 };
 

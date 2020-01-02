@@ -1,6 +1,6 @@
 import videojs from 'video.js';
 import {sendDialog} from './conversation';
-import {getCurrentSubject} from '../memory';
+import {getCurrentSubject} from './memory';
 import 'video.js/dist/video-js.css';
 
 let player;
@@ -23,7 +23,7 @@ export const stop = () => {
 
 export const play = video => {
 	stop();
-	player.src(`http://onchance.net/videos/${video.fileName}`);
+	player.src(`https://onchance.net/videos/${video.fileName}`);
 	
 	player.ready( () => {
 		player.play()
@@ -38,10 +38,10 @@ export const play = video => {
 	
 	//this should be part of the metadata 
 	const tags = [
-		{
-			time: 5,
-			tag: 'opa',
-		}
+		// {
+		// 	time: 5,
+		// 	tag: 'opa',
+		// }
 	];
 
 	//add triggers 

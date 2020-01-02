@@ -1,7 +1,7 @@
 import $ from 'jquery';
 // import YTPlayer from './video-player-youtube';
 // import localPlayer from './video-player-local';
-import videoCollection from'../../server/assets/video-collection.json';
+import videoCollection from'../../videography/video-collection.json';
 
 const playerService = 'localPlayer'; // 'youtube' || 'localPlayer'
 let player;
