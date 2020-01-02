@@ -1,1 +1,10 @@
 .git
+
+.vscode/
+credentials/
+dist/
+docker/
+videography/videos/
+util/
+
+node_modules/

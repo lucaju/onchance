@@ -5,14 +5,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-package-lock.json
-
-
+.vscode/
 credentials/
-Design/
-videos/
-dis/
+dist/
 docker/
+videography/videos/
+util/
 
 
 # Runtime data
