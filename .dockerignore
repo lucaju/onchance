@@ -3,6 +3,6 @@
 .vscode/
 dist/
 docker/
+my-credentials/
 videography/videos/
 util/
-my-credentials/

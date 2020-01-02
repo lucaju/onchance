@@ -6,10 +6,10 @@ yarn-debug.log*
 yarn-error.log*
 
 .vscode/
-my-credentials/
 dist/
 docker/
-videography/videos/
+my-credentials/
+videography/videos/*
 util/
 
 
