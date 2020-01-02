@@ -3,64 +3,12 @@ const Analyzer = require('natural').SentimentAnalyzer;
 const stemmer = require('natural').PorterStemmer;
 
 const difference = require('lodash/fp/difference');
-const differenceBy = require('lodash/fp/differenceBy');
 const intersection = require('lodash/fp/intersection');
-
-const videoCollection = require('./assets/video-collection.json');
-// const collectionMetadata = require('./assets/collection-metadata.json');
-
 
 const tokenizer = new natural.WordTokenizer();
 const analyzer = new Analyzer('English', stemmer, 'afinn');
 
-const watchedCollection = [];
-
-const getVideo = conversation => {
-
-	const videoBasedOnSubject = getVideoBySubject(conversation.bot);
-	// const videoBasedOnSentiment = getVideoBySentiment(conversation.user);
-	// const video = getVideoByKeyword(conversation.user);
-
-	// console.log(video);
-
-	return videoBasedOnSubject;
-
-};
-
-const getVideoBySubject = bot => {
-
-	if (bot.subjects.length == 0) {
-		return {
-			error: 'No subject'
-		};
-	}
-
-	const videosAvailable = videoCollection.filter(video => video.subject[0].toLowerCase() == bot.subjects[0].toLowerCase());
-	// console.log(videosAvailable);
-
-	if (videosAvailable.length == 0) {
-		return {
-			error: 'No video found'
-		};
-	}
-
-	//filter videos wathched
-	let unwatchedVideos = differenceBy(watchedCollection, videosAvailable, 'subject');
-	if (unwatchedVideos.length == 0) unwatchedVideos = videosAvailable; //if all videos were watched, pick a randomly among the available videos
-
-	//select video
-	const randomPick = Math.floor(Math.random() * Math.floor(unwatchedVideos.length - 1));
-	const selectedVideo = unwatchedVideos[randomPick];
-
-	//add video to wathed Collection
-	watchedCollection.push(selectedVideo);
-
-	// console.log(selectedVideo);
-
-	return selectedVideo;
-};
-
-const getVideoBySentiment = msg => {
+const getVideoBySentiment = ({msg, videoCollection, watchedCollection}) => {
 
 	//sentiment amnalysis
 	const tokens = tokenizer.tokenize(msg.text);
@@ -84,13 +32,10 @@ const getVideoBySentiment = msg => {
 	const randomPick = Math.floor(Math.random() * Math.floor(unwatchedVideos.length - 1));
 	const selectedVideo = unwatchedVideos[randomPick];
 
-	//add video to wathed Collection
-	watchedCollection.push(selectedVideo);
-
 	return selectedVideo;
 };
 
-const getVideoByKeyword = msg => {
+const getVideoByKeyword = ({msg, videoCollection, watchedCollection}) => {
 
 	//sentiment amnalysis
 	const tokens = tokenizer.tokenize(msg.text);
@@ -126,11 +71,9 @@ const getVideoByKeyword = msg => {
 		selectedVideo = unwatchedVideos[randomPick];
 	}
 
-	//add video to wathed Collection
-	watchedCollection.push(selectedVideo);
-
 	return selectedVideo;
 
 };
 
-exports.getVideo = getVideo;
+exports.getVideoBySentiment = getVideoBySentiment;
+exports.getVideoByKeyword = getVideoByKeyword;

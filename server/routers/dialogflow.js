@@ -1,9 +1,21 @@
+const express = require('express');
 const dialogflow = require('dialogflow');
 const uuidv4 = require('uuid/v4');
+
+const router = new express.Router();
+router.use(express.json());
 
 const projectId = 'loto-documentary';
 
 let contexts = [];
+
+
+router.post('/dialogflow', async (req, res) => {
+	const msg = req.body.msg;
+	const dialogRes = await sendDialog(msg);
+	res.send(dialogRes);
+});
+
 
 /**
  * Send a query to the dialogflow agent, and return the query result.
@@ -16,7 +28,7 @@ const sendDialog = async msg => {
 
 	// // Create a new session
 	const sessionClient = new dialogflow.SessionsClient({
-		keyFilename: './credentials/google-dialogflow-Loto-Documentary-5ebc6370765e.json',
+		keyFilename: './credentials/dialogflow.json',
 	});
 	
 	const sessionPath = sessionClient.sessionPath(projectId, sessionId);
@@ -82,9 +94,9 @@ const sendDialog = async msg => {
 	}
 
 	// console.log(dialogResult.subjects);
-	
+
 	return dialogResult;
 
 };
 
-exports.sendDialog = sendDialog;
+module.exports = router;
