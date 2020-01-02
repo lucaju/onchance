@@ -5,7 +5,7 @@
 	"author": {
 		"name": "Luciano Frizzera",
 		"email": "lucaju@gmail.com",
-		"url": "http://luciano.fluxo.art.br"
+		"url": "https://luciano.fluxo.art.br"
 	},
 	"contributors": [
 		{
@@ -37,9 +37,9 @@
 	},
 	"dependencies": {
 		"body-parser": "^1.19.0",
-		"dialogflow": "^0.14.1",
+		"dialogflow": "^1.0.0",
 		"express": "^4.17.1",
-		"googleapis": "^45.0.0",
+		"googleapis": "^46.0.0",
 		"handlebars": "^4.5.3",
 		"jquery": "^3.4.1",
 		"lodash": "^4.17.15",
@@ -64,7 +64,7 @@
 		"html-webpack-template": "^6.2.0",
 		"image-webpack-loader": "^6.0.0",
 		"jsonfile": "^5.0.0",
-		"mini-css-extract-plugin": "^0.8.0",
+		"mini-css-extract-plugin": "^0.9.0",
 		"nodemon": "^2.0.1",
 		"rimraf": "^3.0.0",
 		"simple-excel-to-json": "^2.2.1",
