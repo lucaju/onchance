@@ -39,19 +39,20 @@ module.exports = merge(common, {
 	},
 	plugins: [
 		new CopyWebpackPlugin([
-			{ from: './src/assets', to: 'assets' }
+			{ from: './src/assets', to: 'assets' },
+			{ from: './videography/videos', to: 'videos' }
 		]),
 		new HtmlWebpackPlugin({
 			template: 'src/index.html',
 			inject: 'body'
 		}),
-		new webpack.NamedModulesPlugin(),
-		new webpack.NamedChunksPlugin(),
 		new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify('development')}),
 		new webpack.EvalSourceMapDevToolPlugin({
 			module: true,
 			columns: true,
 			exclude: [/jquery/]
-		})
+		}),
+		new webpack.NamedChunksPlugin(),
+		new webpack.NamedModulesPlugin(),
 	],
 });

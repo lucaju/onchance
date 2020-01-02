@@ -37,15 +37,16 @@ module.exports = merge(common, {
 		})]
 	},
 	plugins: [
-		new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify('production')}),
-		new webpack.optimize.ModuleConcatenationPlugin(),
-		new webpack.NoEmitOnErrorsPlugin(),
 		new CopyWebpackPlugin([
-			{ from: './src/assets', to: 'assets' }
+			{ from: './src/assets', to: 'assets' },
+			{ from: './videography/videos', to: 'videos' }
 		]),
 		new HtmlWebpackPlugin({
 			template: 'src/index.html',
 			inject: 'body'
 		}),
+		new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify('production')}),
+		new webpack.NoEmitOnErrorsPlugin(),
+		new webpack.optimize.ModuleConcatenationPlugin(),
 	]
 });
