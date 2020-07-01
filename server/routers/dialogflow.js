@@ -1,6 +1,6 @@
 const express = require('express');
 const dialogflow = require('dialogflow');
-const uuidv4 = require('uuid/v4');
+const { v4: uuidv4 } = require('uuid');
 
 const router = new express.Router();
 router.use(express.json());

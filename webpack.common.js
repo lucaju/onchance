@@ -1,14 +1,31 @@
 const path = require('path');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackBar = require('webpackbar');
 
 module.exports = {
 	mode: 'none', // all mode defaults for dev and prod and set in the respective configs
+	entry: './src/app.js',
+	output: {
+		filename: '[name].bundle.js',
+		path: path.resolve(__dirname, 'dist'),
+	},
 	plugins: [
 		new webpack.ProgressPlugin(),
 		new CleanWebpackPlugin(),
+		new CopyWebpackPlugin({
+			patterns: [
+				{ from: './src/assets', to: 'assets' },
+				{ from: './videography/videos', to: 'videos' },
+			],
+		}),
+		new HtmlWebpackPlugin({
+			template: 'src/index.html',
+			inject: 'body',
+		}),
 		new MiniCssExtractPlugin({
 			filename: '[name].css',
 			chunkFilename: '[id].css',
