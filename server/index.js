@@ -24,11 +24,12 @@ app.use('/assets', express.static(__dirname + '/assets'));
 app.use(dialogflowRouter);
 app.use(videoRouter);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-	const err = new Error('Not Found');
-	err.status = 404;
-	next(err);
+app.use((req, res) => {
+	res.status(404).send('404: Page not Found');
+});
+
+app.use((error, req, res) => {
+	res.status(500).send('500: Internal Server Error');
 });
 
 
