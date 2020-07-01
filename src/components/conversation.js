@@ -29,13 +29,13 @@ export const initialize = () => {
 	selectBot('DialogFlow'); // defaul
 	addBotSelectorInteraction();
 
-	// botFirstinteraction();
+	botFirstinteraction();
 	
 	// bot first interaction
-	$('body').on('video-ended', (e) => {
-		botFirstinteraction();
-		$('body').off('video-ended');
-	});
+	// $('body').on('video-ended', (e) => {
+	// 	botFirstinteraction();
+	// 	$('body').off('video-ended');
+	// });
 
 };
 
