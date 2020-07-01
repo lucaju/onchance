@@ -21,13 +21,13 @@ const render = () => {
 		start();
 	});
 
-	$('body').keypress(e => {
-		if (e.which === 32 && home === true) {
-			event.preventDefault();
-			home = false;
-			start();
-		}
-	});
+	// $('body').keypress(e => {
+	// 	if (e.which === 32 && home === true) {
+	// 		event.preventDefault();
+	// 		home = false;
+	// 		start();
+	// 	}
+	// });
 
 	const start = () => {
 		$('#app').empty();
