@@ -8,6 +8,7 @@ yarn-error.log*
 .vscode/
 dist/
 docker/
+credentials/
 my-credentials/
 videography/videos/*
 util/
