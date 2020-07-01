@@ -1,19 +1,7 @@
 {
 	"name": "onchance",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"description": "chatbot driven web doc",
-	"author": {
-		"name": "Luciano Frizzera",
-		"email": "lucaju@gmail.com",
-		"url": "https://luciano.fluxo.art.br"
-	},
-	"contributors": [
-		{
-			"name": "Julia Salles",
-			"email": "juliacsalles@yahoo.com.br"
-		}
-	],
-	"license": "CC-BY-NC-4.0",
 	"keywords": [
 		"webdoc",
 		"documentary",
@@ -21,6 +9,9 @@
 		"chance",
 		"randomness"
 	],
+	"author": "Luciano Frizzera <lucaju@gmail.com> (luciano.fluxo.art.br)",
+	"contributors": [ "Julia Salles <juliacsalles@yahoo.com.br>" ],
+	"license": "CC-BY-NC-4.0",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/lucaju/onchance"
@@ -54,10 +45,12 @@
 	},
 	"devDependencies": {
 		"clean-webpack-plugin": "^3.0.0",
+		"commitizen": "^4.1.2",
 		"copy-webpack-plugin": "^5.0.5",
 		"css-loader": "^3.2.1",
 		"eslint": "^6.7.2",
 		"file-loader": "^5.0.2",
+		"git-cz": "^4.7.0",
 		"handlebars-loader": "^1.7.1",
 		"html-loader": "^0.5.5",
 		"html-webpack-plugin": "^3.2.0",
@@ -77,5 +70,10 @@
 		"webpack-dev-server": "^3.9.0",
 		"webpack-merge": "^4.2.2",
 		"webpackbar": "^4.0.0"
+	},
+	"config": {
+		"commitizen": {
+		  "path": "git-cz"
+		}
 	}
 }
