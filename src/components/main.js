@@ -11,7 +11,8 @@ const render = () => {
 	sidebar.render();
 	$(window).resize();
 
-	introFullScreen();
+	$('textarea').focus();
+	// introFullScreen();
 };
 
 const introFullScreen = () => {
@@ -27,11 +28,11 @@ const introFullScreen = () => {
 		videoSectionContainer.removeClass('l12 m12');
 		videoSectionContainer.addClass('l9 m8');
 		
-		// nav.render();
-		// $('<div id="main" class="row">').appendTo($('#app'));
-		// video.render();
-		// sidebar.render();
-		// $(window).resize();
+		nav.render();
+		$('<div id="main" class="row">').appendTo($('#app'));
+		video.render();
+		sidebar.render();
+		$(window).resize();
 	
 		sidebarContainer.css('opacity',0);
 		sidebarContainer.css('display','inline');
