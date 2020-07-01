@@ -1,6 +1,5 @@
 .git
 
-.vscode/
 dist/
 docker/
 my-credentials/
