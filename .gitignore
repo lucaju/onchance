@@ -10,7 +10,6 @@ dist/
 docker/
 credentials/
 my-credentials/
-videography/videos/*
 util/
 
 

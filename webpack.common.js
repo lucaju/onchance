@@ -19,7 +19,6 @@ module.exports = {
 		new CopyWebpackPlugin({
 			patterns: [
 				{ from: './src/assets', to: 'assets' },
-				{ from: './videography/videos', to: 'videos' },
 			],
 		}),
 		new HtmlWebpackPlugin({
