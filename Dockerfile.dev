@@ -1,0 +1,11 @@
+# On Chance
+
+FROM node:14.2.0
+
+WORKDIR /onchance
+
+COPY . .
+
+CMD ["npm", "run", "dev"]
+
+EXPOSE 3000
