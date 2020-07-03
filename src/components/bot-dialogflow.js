@@ -34,7 +34,8 @@ const getSimplifiedLastDialog = data => {
 		bot: {
 			text: msgConcat,
 			intent: data.intent.displayName,
-			subjects: data.subjects
+			subjects: data.subjects,
+			action: data.action
 		}
 	};
 

@@ -167,9 +167,32 @@ export const sendDialog = async msg => {
 
 			delay = typing;
 		}
+		
 
-		const videoData = await getVideo(dialogData);
-		if(videoData) dispatchVideo(videoData, typing);
+		if (dialogData.action) {
+
+			const test = 'play_video.subject_sports.keyword_stats';
+
+			// const actionParams = dialogData.action.split('.');
+			const actionParams = test.split('.');
+
+			const action = {};
+
+			for (const param of actionParams) {
+				const keyValue = param.split('_');
+				action[keyValue[0]] = keyValue[1]
+			}
+
+			dialogData.action = action;
+		
+			// console.log(bot.getSimplifiedLastDialog(dialogData));
+
+			if (dialogData.action.play && dialogData.action.play === 'video') {
+				const videoData = await getVideo(dialogData);
+				if(videoData) dispatchVideo(videoData, typing);
+			}
+
+		}
 
 	}
 
@@ -180,10 +203,6 @@ const getVideo = async dialogData => {
 	if (dialogData.subjects.length == 0) return null;
 
 	setCurrentSubject(dialogData.subjects[0]);
-
-	// return new Promise((resolve, reject) => {
-
-	// if (!dialogData) reject(new Error('No data'));
 
 	const body = bot.getSimplifiedLastDialog(dialogData)
 
