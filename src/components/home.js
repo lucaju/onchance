@@ -1,7 +1,7 @@
 import homeHBS from './home.hbs';
 import content from '../localization/en.json';
 
-let home = true;
+// let home = true;
 
 //update interface
 const render = () => {
