@@ -11,6 +11,7 @@ docker/
 credentials/
 my-credentials/
 util/
+old_src/
 
 
 # Runtime data
