@@ -82,7 +82,6 @@ const sendDialog = async msg => {
 	dialogResult.subjects = [];
 
 	if (contexts.length > 0) {
-		dialogResult.subjects = [];
 		// console.log(context)
 		for (const context of contexts) {
 			if (context.parameters) {
