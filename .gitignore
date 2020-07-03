@@ -11,6 +11,8 @@ docker/
 credentials/
 my-credentials/
 util/
+old_src/
+Dockerfile.dev
 
 
 # Runtime data

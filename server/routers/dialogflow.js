@@ -10,6 +10,15 @@ const projectId = 'loto-documentary';
 let contexts = [];
 
 
+/**
+ * POST new message to DialogFlow
+ * 
+ * @async
+ * @function
+ * @param {Object} req.body Properties 
+ * @returns {Object} res.body - Meta properties
+ * @example
+ */
 router.post('/dialogflow', async (req, res) => {
 	const msg = req.body.msg;
 	const dialogRes = await sendDialog(msg);
@@ -93,9 +102,7 @@ const sendDialog = async msg => {
 	}
 
 	// console.log(dialogResult.subjects);
-
 	return dialogResult;
-
 };
 
 module.exports = router;

@@ -1,9 +1,7 @@
 const express = require('express');
 const differenceBy = require('lodash/fp/differenceBy');
-const intersection = require('lodash/fp/intersection');
 
 const videoSelectionNPL = require('./video-selection-npl');
-
 const videoCollection = require('../../videography/video-collection.json');
 // const collectionMetadata = require('./assets/collection-metadata.json');
 
@@ -12,10 +10,9 @@ const router = new express.Router();
 const selectionType = 'subject'; // ["subject", "sentiment", "keyword"]
 let watchedCollection = [];
 
-
 router.use(express.json());
 
-router.post('/getVideo', async (req, res) => {
+router.post('/getVideo', (req, res) => {
 	const data = req.body;
 	console.log(data);
 	// const video = await videoSelection.getVideo(data);
@@ -92,7 +89,7 @@ const getVideoBySubject = bot => {
 
 const getVideoByFileName = (filename) => {
 	const selectedVideo = videoCollection.find((video) => video.fileName.toLocaleLowerCase() === filename.toLocaleLowerCase());
-	if (!selectedVideo) { return { error: 'No video found' }; };
+	if (!selectedVideo) return { error: 'No video found' };
 	return selectedVideo;
 };
 

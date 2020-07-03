@@ -1,37 +1,46 @@
 const webpack = require('webpack');
-
 const merge = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
 	devtool: false,
-	performance: {
-		hints: 'warning'
-	},
+	performance: { hints: 'warning' },
 	output: { pathinfo: false },
 	optimization: {
-		namedModules: false,
-		namedChunks: false,
-		nodeEnv: 'production',
+		checkWasmTypes: true,
+		concatenateModules: true,
 		flagIncludedChunks: true,
+		namedChunks: false,
+		namedModules: false,
+		nodeEnv: 'production',
+		noEmitOnErrors: true,
 		occurrenceOrder: true,
 		sideEffects: true,
 		usedExports: true,
-		concatenateModules: true,
-		noEmitOnErrors: true,
-		checkWasmTypes: true,
 		minimize: true,
-		minimizer: [new TerserPlugin({
-			cache: true,
-			parallel: true,
-			sourceMap: false//true
-		})]
+		minimizer: [
+            new TerserPlugin({
+                cache: true, //default
+                parallel: true, // default
+                sourceMap: true //use sourceMapDevToolPlugin
+            }),
+            new OptimizeCSSAssetsPlugin({})
+        ],
 	},
 	plugins: [
-		new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify('production')}),
-		new webpack.NoEmitOnErrorsPlugin(),
+		new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production') }),
 		new webpack.optimize.ModuleConcatenationPlugin(),
+		new webpack.NoEmitOnErrorsPlugin(),
+		new webpack.SourceMapDevToolPlugin({
+            filename: 'js/app.js.map',
+            module: true,
+            columns: true,
+            noSources: false,
+            namespace: '',
+            exclude: [/react/]
+        })
 	]
 });
