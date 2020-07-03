@@ -15,7 +15,7 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.ProgressPlugin(),
-		new CleanWebpackPlugin(),
+		new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
 		new CopyWebpackPlugin({
 			patterns: [
 				{ from: './src/assets', to: 'assets' },

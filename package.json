@@ -73,5 +73,10 @@
 		"commitizen": {
 			"path": "git-cz"
 		}
+	},
+	"nodemonConfig": {
+		"watch": [
+		  "server"
+		]
 	}
 }
