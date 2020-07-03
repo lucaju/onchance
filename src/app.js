@@ -14,9 +14,13 @@ import './style.css';
 import home from './components/home';
 import main from './components/main';
 
-$('body').on('start', () => {
-	$('body').off('start');
+if (window.location.href.match(/#/)) {
 	main.render();
-});	
+} else {
+	$('body').on('start', () => {
+		$('body').off('start');
+		main.render();
+	});
 
-home.render();
+	home.render();
+}
