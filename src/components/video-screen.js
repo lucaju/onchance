@@ -21,7 +21,7 @@ export const initiate = async () => {
 		$('#player').hide();
 		player.initiate();
 
-		selectRandomVideo();
+		// selectRandomVideo();
 	}
 
 

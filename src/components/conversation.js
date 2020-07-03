@@ -73,10 +73,12 @@ const selectBot = async botName => {
 
 const botFirstinteraction = () => {
 	//first interaction - if the user don't speak first
-	let timeFirstInteraction = Math.random(0.8, 1) * 3000;
-	setTimeout(() => {
-		sendDialog('hello');
-	}, timeFirstInteraction);
+	// let timeFirstInteraction = Math.random(0.8, 1) * 3000;
+	// setTimeout(() => {
+	// 	sendDialog('hello');
+	// }, timeFirstInteraction);
+
+	sendDialog('hello');
 };
 
 export const userInput = msg => {
@@ -167,25 +169,13 @@ export const sendDialog = async msg => {
 
 			delay = typing;
 		}
-		
 
 		if (dialogData.action) {
-
-			const test = 'play_video.subject_sports.keyword_stats';
-
-			// const actionParams = dialogData.action.split('.');
-			const actionParams = test.split('.');
-
-			const action = {};
-
-			for (const param of actionParams) {
-				const keyValue = param.split('_');
-				action[keyValue[0]] = keyValue[1]
-			}
-
+			//parse
+			const actionParams = dialogData.action.split('.').map(d => d.split('_'));;
+			const entries = new Map(actionParams);
+			const action = Object.fromEntries(entries);
 			dialogData.action = action;
-		
-			// console.log(bot.getSimplifiedLastDialog(dialogData));
 
 			if (dialogData.action.play && dialogData.action.play === 'video') {
 				const videoData = await getVideo(dialogData);
@@ -200,7 +190,7 @@ export const sendDialog = async msg => {
 
 const getVideo = async dialogData => {
 
-	if (dialogData.subjects.length == 0) return null;
+	// if (dialogData.subjects.length == 0) return null;
 
 	setCurrentSubject(dialogData.subjects[0]);
 

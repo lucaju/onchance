@@ -1,6 +1,5 @@
 const express = require('express');
 const differenceBy = require('lodash/fp/differenceBy');
-const intersection = require('lodash/fp/intersection');
 
 const videoSelectionNPL = require('./video-selection-npl');
 
@@ -9,7 +8,7 @@ const videoCollection = require('../../videography/video-collection.json');
 
 const router = new express.Router();
 
-const selectionType = 'subject'; // ["subject", "sentiment", "keyword"]
+const selectionType = 'subject'; // ["subject", "sentiment", "keyword", "filename"]
 let watchedCollection = [];
 
 
@@ -17,7 +16,6 @@ router.use(express.json());
 
 router.post('/getVideo', async (req, res) => {
 	const data = req.body;
-	console.log(data);
 	// const video = await videoSelection.getVideo(data);
 	const video = getVideo(data);
 	res.json(video);
@@ -26,9 +24,8 @@ router.post('/getVideo', async (req, res) => {
 
 const getVideo = ({bot, user}) => {
 
-	console.log(bot);
-
 	if (bot.action.subject) selectionType === 'subject';
+	if (bot.action.keyword && !bot.action.subject) selectionType === 'keyword';
 	if (bot.action.file) selectionType === 'filename';
 
 	let selectedVideo;
@@ -42,13 +39,9 @@ const getVideo = ({bot, user}) => {
 			watchedCollection
 		});
 	} else if (selectionType === 'keyword') {
-		selectedVideo = videoSelectionNPL.getVideoByKeyword({
-			msg: user,
-			videoCollection,
-			watchedCollection
-		});
+		selectedVideo = getVideoByKeyword(bot);
 	} else if (selectionType === 'filename') {
-		selectedVideo = getVideoByFileName(bot.action.file);
+		selectedVideo = getVideoByFileName(bot);
 	}
 
 	//add video to wathed Collection
@@ -58,23 +51,23 @@ const getVideo = ({bot, user}) => {
 
 };
 
-const getVideoBySubject = bot => {
+const getVideoBySubject = ({action}) => {
 
-	if (bot.subjects.length == 0) {
-		return {
-			error: 'No subject'
-		};
-	}
+	const subject = action.subject.toLowerCase();
 
-	const videosAvailable = videoCollection.filter(video => video.subject[0].toLowerCase() == bot.subjects[0].toLowerCase());
-	// console.log(videosAvailable);
+	const videosAvailable = videoCollection.filter((video) => {
+		const videoSubjects = video.subject.join(' ').toLowerCase();
+		return videoSubjects === subject;
+	});
 
-	if (videosAvailable.length == 0) { return { error: 'No video found' }; };
+	if (videosAvailable.length == 0) { return { error: 'No video found' }; }
 
 	//if keywords
-	if (bot.actions.keyword) {
+	if (action.keyword) {
+		const botKeywords = action.keyword.toLowerCase();
 		videosAvailable.filter((video) => {
-			bot.actions.keyword.match(video.keywords.join(' '));
+			const videoKeywords = video.keywords.join(' ').toLowerCase();
+			botKeywords.match(videoKeywords);
 		});
 	}
 
@@ -89,10 +82,35 @@ const getVideoBySubject = bot => {
 	return selectedVideo;
 };
 
+const getVideoByKeyword = ({action}) => {
 
-const getVideoByFileName = (filename) => {
-	const selectedVideo = videoCollection.find((video) => video.fileName.toLocaleLowerCase() === filename.toLocaleLowerCase());
-	if (!selectedVideo) { return { error: 'No video found' }; };
+	const botKeywords = action.keyword.toLowerCase();
+
+	const videosAvailable = videoCollection.filter((video) => {
+		const videoKeywords = video.keywords.join(' ').toLowerCase();
+		botKeywords.match(videoKeywords);
+	});
+
+	if (videosAvailable.length == 0) { return { error: 'No video found' }; }
+
+	//filter videos wathched
+	let unwatchedVideos = differenceBy(watchedCollection, videosAvailable, 'subject');
+	if (unwatchedVideos.length == 0) unwatchedVideos = videosAvailable; //if all videos were watched, pick a randomly among the available videos
+
+	//select video
+	const randomPick = Math.floor(Math.random() * Math.floor(unwatchedVideos.length - 1));
+	const selectedVideo = unwatchedVideos[randomPick];
+
+	return selectedVideo;
+};
+
+
+const getVideoByFileName = ({action}) => {
+	const fileName = action.fileName.toLowerCase();
+	const selectedVideo = videoCollection.find((video) => (
+		video.fileName.toLowerCase() === fileName
+	));
+	if (!selectedVideo) { return { error: 'No video found' }; }
 	return selectedVideo;
 };
 
