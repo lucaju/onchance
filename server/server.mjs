@@ -25,6 +25,7 @@ app.use('/video', video);
 
 //static
 app.use(express.static('./dist'));
+app.use('/videos', express.static('./videos'));
 
 //catch all
 app.get('*', (req, res) => {
