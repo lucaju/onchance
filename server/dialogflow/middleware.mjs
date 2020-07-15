@@ -1,4 +1,4 @@
-import dialogflow from 'dialogflow';
+import dialogflow from '@google-cloud/dialogflow';
 import { v4 as uuidv4 } from 'uuid';
 import { getVideo } from '../videos/videos.mjs';
 
@@ -14,9 +14,9 @@ export const sendDialog = async (text) => {
 	// Create a new session
 	const sessionId = uuidv4();
 	const sessionClient = new dialogflow.SessionsClient({
-		keyFilename: './credentials/dialogflow.json',
+		keyFilename: './config/dialogflow.json',
 	});
-	const sessionPath = sessionClient.sessionPath(projectId, sessionId);
+	const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId);
 
 	const request = {
 		session: sessionPath,
