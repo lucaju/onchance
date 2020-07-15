@@ -9,6 +9,7 @@ config/
 dist/
 docker/
 util/
+videos/
 Dockerfile.dev
 
 
