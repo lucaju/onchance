@@ -1,36 +1,28 @@
 {
     "env": {
-        "es6": true,
-        "node": true,
-        "browser": true,
-        "jquery": true
+      "browser": true,
+      "es6": true,
+      "node": true,
+      "jest": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parser": "babel-eslint",
     "parserOptions": {
-        "sourceType": "module",
-        "ecmaVersion": 2018,
-        "allowImportExportEverywhere": true
+      "allowImportExportEverywhere": true,
+      "ecmaVersion": 2020,
+      "sourceType": "module"
     },
     "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "no-console": [
-            "error",
-            { "allow": ["log","error"] }
-        ]
+      "linebreak-style": ["error", "unix"],
+      "quotes": [2, "single"],
+      "no-multi-spaces": 0,
+      "no-trailing-spaces": 0,
+      "no-unused-vars": 2,
+      "semi": ["error", "always"],
+      "require-await": ["error"]
     }
-}
+  }  

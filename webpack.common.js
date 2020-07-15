@@ -8,19 +8,14 @@ const WebpackBar = require('webpackbar');
 
 module.exports = {
 	mode: 'none', // all mode defaults for dev and prod and set in the respective configs
-	entry: './src/app.js',
+	entry: { app: ['./src/index.js'] },
 	output: {
-		filename: '[name].bundle.js',
-		path: path.resolve(__dirname, 'dist'),
+		filename: '[name].js',
+		path: path.resolve(__dirname, 'dist')
 	},
 	plugins: [
 		new webpack.ProgressPlugin(),
 		new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-		new CopyWebpackPlugin({
-			patterns: [
-				{ from: './src/assets', to: 'assets' },
-			],
-		}),
 		new HtmlWebpackPlugin({
 			template: 'src/index.html',
 			inject: 'body',
@@ -29,54 +24,81 @@ module.exports = {
 			filename: '[name].css',
 			chunkFilename: '[id].css',
 		}),
-		new webpack.ProvidePlugin({
-			$: 'jquery',
-			jQuery: 'jquery',
-			'window.jQuery': 'jquery',
-			'window.$': 'jquery'
+		new CopyWebpackPlugin({
+			patterns: [
+				{ from: './src/assets', to: 'assets' },
+			],
 		}),
 		new WebpackBar(),
 	],
 	module: {
-		rules: [
+		rules: [{
+			test: /\.(js|jsx)$/,
+			exclude: /(node_modules)/,
+			use: [{
+				loader: 'babel-loader',
+				options: {
+					// sourceType: 'unambiguous',
+					presets: [
+						'@babel/preset-env',
+						'@babel/preset-react',
+					],
+					plugins: [
+						'@babel/plugin-proposal-class-properties',
+						['@babel/plugin-transform-runtime', {
+								corejs: 3,
+								proposals: true,
+								// 'helpers': false,
+								useESModules: true,
+								version: '^7.10.4',
+							},
+						],
+					],
+				},
+			}]},
 			{
 				test: /\.css$/,
-				use: [
-					{
+				use: [{
 						loader: MiniCssExtractPlugin.loader,
 						options: {
 							// you can specify a publicPath here
 							// by default it uses publicPath in webpackOptions.output
 							publicPath: '../',
 							hmr: process.env.NODE_ENV === 'development',
+							esModule: true,
 						},
 					},
 					'css-loader',
 				],
 			},
 			{
-				test: /\.(gif|png|jpe?g|svg)$/i,
-				use: [
-					'file-loader',
-					{
-						loader: 'image-webpack-loader',
+				test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+				enforce: 'pre', // preload the jshint loader
+				use: [{
+						loader: 'url-loader',
 						options: {
-							bypassOnDebug: true, // webpack@1.x
-							disable: true, // webpack@2.x and newer
+							query: { limit: 25000 },
 						},
 					},
 				],
 			},
 			{
-				test: /\.hbs$/,
-				loader: 'handlebars-loader',
-				options: {
-					knownHelpersOnly: false,
-					inlineRequires: /\/assets\/(:?images|audio|video)\//ig,
-					helperDirs: [path.join(__dirname, '/lib/hbs-helpers')],
-					// partialDirs: [path.join(PATHS.TEMPLATES, 'partials')],
-				},
-			}
+				test: /\.(png|jpg|jpeg|gif)$/i,
+				enforce: 'pre', // preload the jshint loader
+				// exclude: /node_modules/, // exclude any and all files in the node_modules folder
+				use: [{
+						loader: 'file-loader',
+						options: {
+							name: '[name].[ext]',
+							outputPath: 'img',
+						},
+					},
+					{
+						loader: 'image-webpack-loader',
+						options: { disable: true /* webpack@2.x and newer */ },
+					},
+				],
+			},
 		]
 	},
 };
