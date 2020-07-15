@@ -1,11 +1,11 @@
 # On Chance
 
-FROM node:14.2.0
+FROM node:14.5.0
 
 WORKDIR /onchance
 
 COPY . .
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "server:dev"]
 
 EXPOSE 3000
