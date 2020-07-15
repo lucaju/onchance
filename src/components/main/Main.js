@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Topbar from './Topbar';
+import Topbar from './topbar/Topbar';
 import Sidebar from './sidebar/Sidebar';
 import Stage from './stage/Stage';
 import Debug from './../dialogs/Debug';

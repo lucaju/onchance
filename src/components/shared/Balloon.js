@@ -5,7 +5,7 @@ import { Avatar, Grid, Typography, withStyles } from '@material-ui/core';
 
 import AdbIcon from '@material-ui/icons/Adb';
 import balloonStyles from './Balloon.style';
-import DebubButton from './debugButton';
+import DebubButton from './DebugButton';
 
 import { useApp } from '../../app';
 
