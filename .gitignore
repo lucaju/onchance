@@ -8,8 +8,6 @@ yarn-error.log*
 config/
 dist/
 docker/
-credentials/
-my-credentials/
 util/
 Dockerfile.dev
 
