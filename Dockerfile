@@ -10,5 +10,6 @@ COPY . .
 RUN npm install
 RUN npm run production
 
-CMD ["pm2", "start", "./server/index.js", "--no-daemon", "--experimental-top-level-await"]
+CMD ["pm2-runtime", "ecosystem.config.js"]
+
 EXPOSE 3000
