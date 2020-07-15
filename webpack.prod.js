@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
@@ -35,7 +35,7 @@ module.exports = merge(common, {
 		new webpack.optimize.ModuleConcatenationPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.SourceMapDevToolPlugin({
-            filename: 'js/app.js.map',
+            filename: 'app.js.map',
             module: true,
             columns: true,
             noSources: false,

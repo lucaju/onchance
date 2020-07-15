@@ -8,11 +8,10 @@ const WebpackBar = require('webpackbar');
 
 module.exports = {
 	mode: 'none', // all mode defaults for dev and prod and set in the respective configs
-	entry: './src/app.js',
+	entry: { app: ['./src/index.js'] },
 	output: {
-		filename: '[name].bundle.js',
-		path: path.resolve(__dirname, 'dist'),
-		publicPath: '/',
+		filename: '[name].js',
+		path: path.resolve(__dirname, 'dist')
 	},
 	plugins: [
 		new webpack.ProgressPlugin(),
@@ -45,6 +44,7 @@ module.exports = {
 						'@babel/preset-react',
 					],
 					plugins: [
+						'@babel/plugin-proposal-class-properties',
 						['@babel/plugin-transform-runtime', {
 								corejs: 3,
 								proposals: true,
