@@ -19,13 +19,11 @@
 		"url": "https://github.com/lucaju/onchance"
 	},
 	"scripts": {
-		"start": "node ./server/index.js",
-		"dev": "NODE_ENV=development nodemon ./server/index-dev.js",
-		"webpackServer": "webpack-dev-server --config webpack.dev.js",
-		"watch": "webpack --config webpack.dev.js --debug=true --display-error-details=true --watch",
-		"build-dev": "webpack --config webpack.dev.js",
+		"start": "NODE_ENV=production node --experimental-top-level-await ./server/index.mjs",
 		"production": "webpack --mode production --config webpack.prod.js -p --progress",
-		"updateVideoCollection": "node server/util/update-video-collection.js",
+		"build:start": "npm run production && npm start",
+		"server:dev": "NODE_ENV=development nodemon --experimental-top-level-await ./server/index.mjs",
+		"util:updateVideoCollection": "node --experimental-top-level-await ./util/update-video-collection.mjs",
 		"test": "env-cmd -f ./config/test.env jest --runInBand --forceExit",
 		"test:watch": "env-cmd -f ./config/test.env jest --runInBand --watch ",
 		"cm": "git-cz"
@@ -39,26 +37,27 @@
 		"dialogflow": "^1.2.0",
 		"env-cmd": "^10.1.0",
 		"express": "^4.17.1",
-		"googleapis": "^52.1.0",
-		"lodash": "^4.17.15",
+		"lodash": "^4.17.19",
+		"natural": "^2.1.5",
 		"overmind": "^24.1.1",
 		"overmind-react": "^25.1.1",
-		"natural": "^2.1.5",
 		"prop-types": "^15.7.2",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
+		"react-router-dom": "^5.2.0",
 		"uuid": "^8.2.0",
-		"video.js": "^7.8.3",
+		"video.js": "^7.8.4",
 		"youtube-player": "^5.5.2"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.10.4",
+		"@babel/cli": "^7.10.5",
+		"@babel/core": "^7.10.5",
 		"@babel/plugin-syntax-dynamic-import": "^7.8.3",
 		"@babel/plugin-transform-react-jsx": "^7.10.4",
-		"@babel/plugin-transform-runtime": "^7.10.4",
+		"@babel/plugin-transform-runtime": "^7.10.5",
 		"@babel/preset-env": "^7.10.4",
 		"@babel/preset-react": "^7.10.4",
-		"@babel/runtime-corejs3": "^7.10.4",
+		"@babel/runtime-corejs3": "^7.10.5",
 		"babel-eslint": "^10.1.0",
 		"babel-jest": "^26.1.0",
 		"babel-loader": "^8.1.0",
@@ -67,10 +66,12 @@
 		"commitizen": "^4.1.2",
 		"copy-webpack-plugin": "^6.0.3",
 		"css-loader": "^3.6.0",
-		"eslint": "^7.3.1",
+		"eslint": "^7.4.0",
 		"eslint-plugin-react": "^7.20.3",
 		"file-loader": "^6.0.0",
+		"fs-extra": "^9.0.1",
 		"git-cz": "^4.7.0",
+		"googleapis": "^54.0.0",
 		"html-webpack-plugin": "^4.3.0",
 		"html-webpack-template": "^6.2.0",
 		"husky": "^4.2.5",
@@ -82,25 +83,20 @@
 		"nodemon": "^2.0.4",
 		"optimize-css-assets-webpack-plugin": "^5.0.3",
 		"prettier": "2.0.5",
-		"simple-excel-to-json": "^2.2.1",
 		"terser-webpack-plugin": "^3.0.6",
 		"url-loader": "^4.1.0",
 		"webpack": "^4.43.0",
 		"webpack-bundle-analyzer": "^3.8.0",
 		"webpack-cli": "^3.3.12",
+		"webpack-dev-middleware": "^3.7.2",
 		"webpack-dev-server": "^3.11.0",
 		"webpack-hot-middleware": "^2.25.0",
-		"webpack-merge": "^4.2.2",
+		"webpack-merge": "^5.0.9",
 		"webpackbar": "^4.0.0"
 	},
 	"config": {
 		"commitizen": {
 			"path": "git-cz"
-		}
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "npm run test"
 		}
 	}
 }
