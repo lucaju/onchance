@@ -6,7 +6,6 @@ yarn-debug.log*
 yarn-error.log*
 
 dist/
-server/
 docker/
 credentials/
 my-credentials/
