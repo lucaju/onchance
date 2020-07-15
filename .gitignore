@@ -5,13 +5,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-.vscode/
 dist/
+server/
 docker/
 credentials/
 my-credentials/
 util/
-old_src/
 Dockerfile.dev
 
 
