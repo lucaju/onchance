@@ -15,8 +15,7 @@ export const devTools = (app) => {
 		writeToDisk: true,
 	}));
 
-	//Enable "webpack-dev-middleware
-	app.use(webpackHotMiddleware(compiler)); //Enable "webpack-hot-middleware"
-
+	//Enable "webpack-hot-middleware"
+	app.use(webpackHotMiddleware(compiler));
 	console.log(chalk.blue('Dev Server is online!'));
 };

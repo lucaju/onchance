@@ -29,7 +29,7 @@ module.exports = {
 				{ from: './src/assets', to: 'assets' },
 			],
 		}),
-		new WebpackBar(),
+		new WebpackBar({ color: '#0099ff' }),
 	],
 	module: {
 		rules: [{
