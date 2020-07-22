@@ -3,8 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { getVideo } from '../videos/videos.mjs';
 
 const projectId = 'loto-documentary';
-
-// let contexts = [];
+let contexts = [];
 
 /**
  * Send a query to the dialogflow agent, and return the query result.
@@ -26,12 +25,15 @@ export const sendDialog = async (text) => {
 				languageCode: 'en-US', // The language used by the client (en-US)
 			},
 		},
-		// queryParams: { contexts: contexts },
+		queryParams: { contexts: contexts },
 	};
 
 	//send request
 	const responses = await sessionClient.detectIntent(request);
 	const result = responses[0].queryResult;
+
+	//save context
+	contexts = result.outputContexts;
 
 	return processResponse(result);
 };
