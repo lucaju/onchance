@@ -3,15 +3,28 @@ import { v4 as uuidv4 } from 'uuid';
 import { getVideo } from '../videos/videos.mjs';
 
 const projectId = 'loto-documentary';
+const sessionId = uuidv4();
 let contexts = [];
+let queryParams = {};
 
 /**
  * Send a query to the dialogflow agent, and return the query result.
  * @param {string} projectId The project to be used
  */
 export const sendDialog = async (text) => {
+
+	//reset context
+	queryParams = { contexts };
+
+	if (text === 'hello') {
+		queryParams = {
+			resetContexts: true,
+			contexts: [],
+		};
+	}
+
 	// Create a new session
-	const sessionId = uuidv4();
+	// const sessionId = uuidv4();
 	const sessionClient = new dialogflow.SessionsClient({
 		keyFilename: './config/dialogflow.json',
 	});
@@ -25,7 +38,7 @@ export const sendDialog = async (text) => {
 				languageCode: 'en-US', // The language used by the client (en-US)
 			},
 		},
-		queryParams: { contexts: contexts },
+		queryParams
 	};
 
 	//send request
