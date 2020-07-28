@@ -6,7 +6,7 @@ import VolumeOffIcon from '@material-ui/icons/VolumeOff';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 
 import VideoPlayer from './VideoPlayer';
-import { useApp } from '../../../app';
+import { useApp } from '../../app';
 
 const useStyles = makeStyles((theme) => ({
 	root: (sidebarWidth) => ({

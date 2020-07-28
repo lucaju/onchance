@@ -13,7 +13,7 @@ import { yellow } from '@material-ui/core/colors';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 
-import Balloon from '../shared/Balloon';
+import Balloon from '../conversation/balloon/Balloon';
 
 const useStyles = makeStyles((theme) => ({
 	main: {

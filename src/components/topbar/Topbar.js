@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { AppBar, Link, makeStyles, Typography } from '@material-ui/core';
 
-import { useApp } from '../../../app';
+import { useApp } from '../../app';
 
 const useStyles = makeStyles((theme) => ({
 	topBar: (sidebarWidth) => ({ paddingRight: sidebarWidth }),

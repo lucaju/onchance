@@ -5,9 +5,9 @@ import { Avatar, Grid, Typography, withStyles } from '@material-ui/core';
 
 import AdbIcon from '@material-ui/icons/Adb';
 import balloonStyles from './Balloon.style';
-import DebubButton from './DebugButton';
+import DebubButton from '../debug/DebugButton';
 
-import { useApp } from '../../app';
+import { useApp } from '../../../app';
 
 // let timer;
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { IconButton, makeStyles } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 
-import { useApp } from '../../app';
+import { useApp } from '../../../app';
 
 const useStyles = makeStyles((theme) => ({
 	margin: { marginLeft: theme.spacing(0.5) },

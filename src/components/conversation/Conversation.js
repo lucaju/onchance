@@ -2,8 +2,10 @@ import React, { useEffect, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, makeStyles } from '@material-ui/core';
 
-import { useApp } from '../../../app';
-import Balloon from '../../shared/Balloon';
+import { useApp } from '../../app';
+import Balloon from './balloon/Balloon';
+import BalloonNarrator from './balloon/BalloonNarrator';
+import {initialSpeech} from './narrator';
 
 const useStyles = makeStyles((theme) => ({
 	root: (userInputHeight) => ({
@@ -25,26 +27,15 @@ const Conversation = ({ userInputHeight }) => {
 
 	// bot first interaction
 	useEffect(() => {
+		actions.conversation.addNarratorInput(initialSpeech);
 		const timer = setTimeout(() => actions.conversation.addBotInput('hello'), 1000);
 		return () => clearTimeout(timer);
 	}, []);
 
 	//update conversation
 	useLayoutEffect(() => {
-
 		//scroll
 		conversationNode.scrollTop = conversationNode.scrollHeight;
-
-		//if actions
-		if (state.conversation.lastBotInput?.data.actions) {
-			const botActions = state.conversation.lastBotInput.data.actions;
-			// filter for video action
-			const videoTriggers = botActions.filter(({ play }) => play === 'video');
-			if (!videoTriggers) return;
-			//add video actions
-			videoTriggers.map(({video}) => actions.videos.add(video));
-		}
-
 	}, [state.conversation.log]);
 
 	//bit typing time
@@ -61,22 +52,33 @@ const Conversation = ({ userInputHeight }) => {
 					let string = '';
 					messages.map((msg) => (string += msg));
 					const delay = from === 'bot' ? getBotTypingTime(string) : 0;
+					{/* console.log(messages); */}
+					//narrator
+					const baloon =
+						from === 'narrator' ? (
+							<BalloonNarrator
+								key={id}
+								className={classes.balloon}
+								id={id}
+								messages={messages}
+								delay={delay}
+							/>
+						) : (
+							//bot or user
+							<Balloon
+								key={id}
+								side={from === 'user' ? 'right' : 'left'}
+								className={classes.balloon}
+								GridContainerProps={
+									from === 'bot' ? { classes: { root: classes.balloon } } : {}
+								}
+								id={id}
+								messages={messages}
+								delay={delay}
+							/>
+						);
 
-					return (
-						<Balloon
-							key={id}
-							side={from === 'user' ? 'right' : 'left'}
-							className={classes.balloon}
-							GridContainerProps={
-								from === 'bot'
-									? { classes: { root: classes.balloon } }
-									: {}
-							}
-							id={id}
-							messages={messages}
-							delay={delay}
-						/>
-					);
+					return baloon;
 				})}
 			</Grid>
 		</div>

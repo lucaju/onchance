@@ -9,7 +9,7 @@ import {
 	makeStyles,
 } from '@material-ui/core';
 
-import { useApp } from '../../app';
+import { useApp } from '../../../app';
 
 const useStyles = makeStyles(() => ({
 	content: {

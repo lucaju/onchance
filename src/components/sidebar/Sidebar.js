@@ -2,8 +2,8 @@ import React, { useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Drawer, Grid, makeStyles, TextField } from '@material-ui/core';
 
-import { useApp } from '../../../app';
-import Conversation from './Conversation';
+import { useApp } from '../../app';
+import Conversation from '../conversation/Conversation';
 
 let userInputHeight = 64;
 
