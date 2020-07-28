@@ -1,7 +1,11 @@
+import { createRequire } from 'module';
+
 import differenceBy from 'lodash/fp/differenceBy.js';
 import { bySubject, byKeyword, byFilename, bySentiment } from './selection/index.mjs';
 
-import videoCollection from '../../videography/video-collection.mjs';
+const require = createRequire(import.meta.url);
+const videoCollection = require('../../video-collection/video-collection.json');
+
 let watchedCollection = [];
 
 export const getVideo = (request) => {
