@@ -37,8 +37,8 @@ const speechfyVideoMetadata = (video) => {
 	console.log(video);
 	const msg = [
         `Title: ${video.title}\n`,
-        `Author: ${video.author}`,
-        `Year: ${video.year}`,
+        `Author: ${video.author}\n`,
+        `Year: ${video.year}\n`,
         `Genre: ${video.genre}`
 	].join('\n');
 	return msg;

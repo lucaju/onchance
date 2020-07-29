@@ -7,9 +7,10 @@ const useStyles = makeStyles(({palette, spacing}) => ({
 	msg: {
 		padding: spacing(1, 2),
 		marginBottom: 4,
-		display: 'inline-block',
-		wordBreak: 'break-word',
+		// display: 'inline-block',
+		// wordBreak: 'break-word',
 		// fontFamily: 'Share Tech Mono',
+		whiteSpace: 'pre-line',
 		fontSize: 14,
 		color: palette.grey[200],
 	},
