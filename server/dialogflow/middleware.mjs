@@ -16,7 +16,7 @@ export const sendDialog = async (text) => {
 	//reset context
 	queryParams = { contexts };
 
-	if (text === 'hello') {
+	if (text.toLowerCase() === 'hello' || text.toLowerCase() === 'restart') {
 		queryParams = {
 			resetContexts: true,
 			contexts: [],
