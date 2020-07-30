@@ -1,17 +1,17 @@
 {
     "id": "id",
-    "fileName": "a5.mp4",
+    "title": "title",
+    "fileName": "filename.ext",
     "subjects": [
-        "Artificial Intelligence"
+        "subject"
     ],
-    "title": "How Bias is Built into Algorithms",
-    "author": "Cathy O'Neil",
-    "year": 2019,
-    "duration": "00:51",
-    "genre": "Interview",
-    "language": "English",
-    "caption": "English",
+    "author": "author",
+    "year": 2020,
+    "duration": "00:01",
+    "genre": "genre",
+    "language": "laguage",
+    "caption": "caption language",
     "keywords": [
-        "definition"
+        "keyword"
     ]
 }

@@ -1,13 +1,7 @@
 {
-    "action": "",
+    "action": "play",
     "media": "video",
-    "subjects": [
-        "subject1",
-        "subject2"
-    ],
-    "keywords": [
-        "keyword1",
-        "keyword2"
-    ],
+    "subject": "subject",
+    "keyword": "keyword",
     "filename": "filename.ext"
 }
