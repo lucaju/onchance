@@ -16,12 +16,9 @@ export const sendDialog = async (text) => {
 	//reset context
 	queryParams = { contexts };
 
-	if (text.toLowerCase() === 'hello' || text.toLowerCase() === 'restart') {
-		queryParams = {
-			resetContexts: true,
-			contexts: [],
-		};
-	}
+	let reset = false;
+	if (text.toLowerCase() === 'hello' || text.toLowerCase() === 'restart') reset = true;
+	if (reset) resetContexts();
 
 	// Create a new session
 	// const sessionId = uuidv4();
@@ -43,12 +40,22 @@ export const sendDialog = async (text) => {
 
 	//send request
 	const responses = await sessionClient.detectIntent(request);
-	const result = responses[0].queryResult;
+	const response = responses[0].queryResult;
 
 	//save context
-	contexts = result.outputContexts;
+	contexts = response.outputContexts;
 
-	return processResponse(result);
+	const results = processResponse(response);
+	if (reset) results.reset = true;
+
+	return results;
+};
+
+const resetContexts = () => {
+	queryParams = {
+		resetContexts: true,
+		contexts: [],
+	};
 };
 
 const processResponse = (result) => {

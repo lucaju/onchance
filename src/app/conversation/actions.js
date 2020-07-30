@@ -11,6 +11,9 @@ export const addUserInput = ({ state }, input) => {
 
 export const addBotInput = async ({ state, actions, effects }, input) => {
 	const data = await effects.conversation.dialogFlow.sendUserInput(input);
+
+	if (data.reset) resetConversartion(state);
+
 	const dialogue = {
 		from: 'bot',
 		id: uuidv4(),
@@ -31,6 +34,11 @@ export const addBotInput = async ({ state, actions, effects }, input) => {
 			actions.conversation.addNarratorInput(speechfyVideoMetadata(video));
 		});
 	}
+};
+
+const resetConversartion = ({conversation}) => {
+	const initialInteraction = conversation.log[0];
+	conversation.log = [initialInteraction];
 };
 
 const speechfyVideoMetadata = (video) => {
