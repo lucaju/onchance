@@ -1,10 +1,12 @@
-[
-    {
+[{
         "id": "a5",
         "YoutubeID": "",
         "fileName": "a5.mp4",
         "subject": [
             "Artificial Intelligence"
+        ],
+        "intent": [
+            ""
         ],
         "title": "How Bias is Built into Algorithms",
         "author": "Cathy O'Neil",
@@ -14,7 +16,8 @@
         "language": "English",
         "caption": "English",
         "keywords": [
-            "definition"
+            "def 1",
+            "general def"
         ]
     },
     {
@@ -24,6 +27,9 @@
         "subject": [
             "Artificial Intelligence"
         ],
+        "intent": [
+            ""
+        ],
         "title": "How Bias is Built into Algorithms",
         "author": "Cathy O'Neil",
         "year": 2019,
@@ -32,7 +38,8 @@
         "language": "English",
         "caption": "English",
         "keywords": [
-            "definition"
+            "def 1",
+            "general def"
         ]
     },
     {
@@ -42,6 +49,9 @@
         "subject": [
             "Artificial Intelligence"
         ],
+        "intent": [
+            ""
+        ],
         "title": "How Bias is Built into Algorithms",
         "author": "Cathy O'Neil",
         "year": 2019,
@@ -50,7 +60,8 @@
         "language": "English",
         "caption": "English",
         "keywords": [
-            "definition2"
+            "def 2",
+            "general def"
         ]
     },
     {
@@ -60,6 +71,9 @@
         "subject": [
             "Artificial Intelligence"
         ],
+        "intent": [
+            ""
+        ],
         "title": "How Bias is Built into Algorithms",
         "author": "Cathy O'Neil",
         "year": 2019,
@@ -68,7 +82,8 @@
         "language": "English",
         "caption": "English",
         "keywords": [
-            "definition2"
+            "def 2",
+            "general def"
         ]
     },
     {
@@ -78,6 +93,9 @@
         "subject": [
             "Artificial Intelligence"
         ],
+        "intent": [
+            ""
+        ],
         "title": "How Do Algorithms Predict Criminal Behavior?",
         "author": "Myles Bess, PBS",
         "year": 2017,
@@ -86,7 +104,8 @@
         "language": "English",
         "caption": "English",
         "keywords": [
-            "definition"
+            "def 1",
+            "general def"
         ]
     },
     {
@@ -96,6 +115,9 @@
         "subject": [
             "Artificial Intelligence"
         ],
+        "intent": [
+            ""
+        ],
         "title": "The danger of predictive algorithms in criminal justice",
         "author": "Hany Farid",
         "year": 2018,
@@ -104,7 +126,31 @@
         "language": "English",
         "caption": "English",
         "keywords": [
-            "definition"
+            "def 1",
+            "general def"
+        ]
+    },
+    {
+        "id": "m1",
+        "YoutubeID": "",
+        "fileName": "m1.mp4",
+        "subject": [
+            "Artificial Intelligence"
+        ],
+        "intent": [
+            ""
+        ],
+        "title": "Minority Report",
+        "author": "Steven Spielberg",
+        "year": 2002,
+        "duration": "00:38",
+        "genre": "Movie",
+        "language": "English",
+        "caption": "English",
+        "keywords": [
+            "predictive police",
+            "movie",
+            "minority report"
         ]
     }
 ]
