@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 		paddingRight: theme.spacing(2),
 		paddingTop: theme.spacing(2),
 		paddingBottom: theme.spacing(2),
+		background: theme.palette.grey[700]
 	},
 	grid: { height: '100vh' },
 }));
