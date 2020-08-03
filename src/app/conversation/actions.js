@@ -36,9 +36,13 @@ export const addBotInput = async ({ state, actions, effects }, input) => {
 	}
 };
 
-const resetConversartion = ({conversation}) => {
+const resetConversartion = ({conversation, videos}) => {
+	//conversation
 	const initialInteraction = conversation.log[0];
 	conversation.log = [initialInteraction];
+
+	//vdeoplayer
+	videos.log = [];
 };
 
 const speechfyVideoMetadata = (video) => {

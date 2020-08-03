@@ -41,8 +41,12 @@ const VideoPlayer = (props) => {
 	}, [videoState]);
 
 	useEffect(() => {
-		if (file) player.src(`https://onchance.net/videos/${file}`);
-		player.play();
+		if (!file) {
+			player.reset();
+		} else {
+			player.src(`https://onchance.net/videos/${file}`);
+			player.play();
+		}
 	}, [file]);
 
 	useEffect(() => {
