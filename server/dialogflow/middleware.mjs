@@ -94,17 +94,17 @@ const checkForActions = (payloads) => {
 	return actions;
 };
 
-const addVideoAction = ({ filename = null, keywork = null, subject = null }) => {
+const addVideoAction = ({ filename = null, keyword = null, subject = null }) => {
 	let mode = '';
 
 	if (filename) mode = 'filename';
-	if (keywork) mode = 'keywork';
+	if (keyword) mode = 'keyword';
 	if (subject) mode = 'subject';
 
 	const video = getVideo({
 		mode,
 		subject: subject?.stringValue.toLowerCase(),
-		keyword: keywork?.stringValue.toLowerCase(),
+		keyword: keyword?.stringValue.toLowerCase(),
 		filename: filename?.stringValue.toLowerCase(),
 	});
 
