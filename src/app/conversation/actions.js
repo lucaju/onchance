@@ -12,7 +12,7 @@ export const addUserInput = ({ state }, input) => {
 export const addBotInput = async ({ state, actions, effects }, input) => {
 	const data = await effects.conversation.dialogFlow.sendUserInput(input);
 
-	if (data.reset) resetConversartion(state);
+	if (data.reset) resetConversation(state);
 
 	const dialogue = {
 		from: 'bot',
@@ -36,7 +36,7 @@ export const addBotInput = async ({ state, actions, effects }, input) => {
 	}
 };
 
-const resetConversartion = ({conversation, videos}) => {
+const resetConversation = ({conversation, videos}) => {
 	//conversation
 	const initialInteraction = conversation.log[0];
 	conversation.log = [initialInteraction];
