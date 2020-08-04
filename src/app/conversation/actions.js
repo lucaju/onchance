@@ -4,7 +4,7 @@ export const addUserInput = ({ state }, input) => {
 	const dialogue = {
 		id: uuidv4(),
 		from: 'user',
-		messages: [input],
+		messages: [{ text: input }],
 	};
 	state.conversation.log = [...state.conversation.log, dialogue];
 };
@@ -14,10 +14,12 @@ export const addBotInput = async ({ state, actions, effects }, input) => {
 
 	if (data.reset) resetConversation(state);
 
+	const messages = processMessagesTiming(data.messages);
+
 	const dialogue = {
 		from: 'bot',
 		id: uuidv4(),
-		messages: data.messages,
+		messages,
 		data,
 	};
 
@@ -34,6 +36,21 @@ export const addBotInput = async ({ state, actions, effects }, input) => {
 			actions.conversation.addNarratorInput(speechfyVideoMetadata(video));
 		});
 	}
+};
+
+export const addNarratorInput = ({ state }, input) => {
+	const dialogue = {
+		id: uuidv4(),
+		from: 'narrator',
+		messages: [input],
+	};
+	state.conversation.log = [...state.conversation.log, dialogue];
+};
+
+export const getInputById = ({ state }, id) => {
+	const input = state.conversation.log.find((dialog) => dialog.id === id);
+	if (!input) return '';
+	return JSON.stringify(input.data, null, 4);
 };
 
 const resetConversation = ({conversation, videos}) => {
@@ -56,17 +73,23 @@ const speechfyVideoMetadata = (video) => {
 	return msg;
 };
 
-export const addNarratorInput = ({ state }, input) => {
-	const dialogue = {
-		id: uuidv4(),
-		from: 'narrator',
-		messages: [input],
-	};
-	state.conversation.log = [...state.conversation.log, dialogue];
-};
+//bit typing time
+const processMessagesTiming = (messages) => {
 
-export const getInputById = ({ state }, id) => {
-	const input = state.conversation.log.find((dialog) => dialog.id === id);
-	if (!input) return '';
-	return JSON.stringify(input.data, null, 4);
+	let delay = 0;
+	const INITIAL_TIME_TYPING =  Math.random(0.2, 1) * 1000; //random between 300ms and 1 s
+	const TIME_PER_CHARACRTER =  Math.random(0.8, 1.6) * 100; //random between 300ms and 1 s
+
+	messages = messages.map((text) => {
+		const typingTime = delay + INITIAL_TIME_TYPING + (text.length * TIME_PER_CHARACRTER); // number of characters * 20 ms
+		const message = {
+			text,
+			typingTime,
+			delay
+		};
+		delay =+ typingTime;
+		return message;
+	});
+
+	return messages;
 };
