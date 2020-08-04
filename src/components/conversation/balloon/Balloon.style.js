@@ -12,11 +12,30 @@ export default ({ palette, spacing }) => {
 		},
 		leftRow: { textAlign: 'left' },
 		rightRow: { textAlign: 'right' },
-		msg: {
+		box: {
 			padding: spacing(1, 2),
 			borderRadius: 4,
 			marginBottom: 4,
 			display: 'inline-block',
+		},
+		left: {
+			borderTopRightRadius: radius,
+			borderBottomRightRadius: radius,
+			color: palette.grey[700],
+			backgroundColor: palette.grey[100],
+		},
+		right: {
+			borderTopLeftRadius: radius,
+			borderBottomLeftRadius: radius,
+			backgroundColor: rightBgColor,
+			color: palette.common.white,
+		},
+		leftFirst: { borderTopLeftRadius: radius },
+		// leftLast: { borderBottomLeftRadius: radius },
+		rightFirst: { borderTopRightRadius: radius },
+		// rightLast: { borderBottomRightRadius: radius },
+		text: {
+			fontSize: 14,
 			wordBreak: 'break-word',
 			// fontFamily:
 			// 	`-apple-system,
@@ -29,23 +48,10 @@ export default ({ palette, spacing }) => {
 			// 	"Apple Color Emoji",
 			// 	"Segoe UI Emoji",
 			// 	"Segoe UI Symbol"`,
-			fontSize: 14,
-			color: palette.grey[700],
 		},
-		left: {
-			borderTopRightRadius: radius,
-			borderBottomRightRadius: radius,
-			backgroundColor: palette.grey[100],
-		},
-		right: {
-			borderTopLeftRadius: radius,
-			borderBottomLeftRadius: radius,
-			backgroundColor: rightBgColor,
-			color: palette.common.white,
-		},
-		leftFirst: { borderTopLeftRadius: radius },
-		leftLast: { borderBottomLeftRadius: radius },
-		rightFirst: { borderTopRightRadius: radius },
-		rightLast: { borderBottomRightRadius: radius },
+		loader: {
+			paddingTop: 9,
+			height: 20
+		}
 	};
 };

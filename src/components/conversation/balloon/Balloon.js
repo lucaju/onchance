@@ -7,6 +7,9 @@ import AdbIcon from '@material-ui/icons/Adb';
 import balloonStyles from './Balloon.style';
 import DebubButton from '../debug/DebugButton';
 
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import Loader from 'react-loader-spinner';
+
 import { useApp } from '../../../app';
 
 // let timer;
@@ -27,8 +30,6 @@ const Balloon = withStyles(balloonStyles, { name: 'ChatMsg' })((props) => {
 
 	const { state } = useApp();
 	const [isLoading, setIsloading] = useState(true);
-
-	
 
 	const attachClass = (index) => {
 		if (index === 0) return classes[`${side}First`];
@@ -61,28 +62,35 @@ const Balloon = withStyles(balloonStyles, { name: 'ChatMsg' })((props) => {
 					</Avatar>
 				</Grid>
 			)}
-			<Grid item xs={8}>
+			<Grid item xs={side === 'right' ? 0 : 8}>
 				{isLoading && (
-					<div className={classes[`${side}Row`]}>
-						<Typography align={'left'} className={clx(classes.msg, classes[side])}>
-							. . .
-						</Typography>
+					<div className={clx(classes[`${side}Row`], classes.box, classes[side])}>
+						<Loader
+							className={classes.loader}
+							type="ThreeDots"
+							color="#333333"
+							height={12}
+							width={12}
+						/>
 					</div>
 				)}
 				{!isLoading &&
 					messages.map((msg, i) => {
 						const TypographyProps = getTypographyProps(msg, i, props);
 						return (
-							<div key={msg.id || i} className={classes[`${side}Row`]}>
+							<div
+								key={msg.id || i}
+								className={clx(
+									classes[`${side}Row`],
+									classes.box,
+									classes[side],
+									attachClass(i)
+								)}
+							>
 								<Typography
 									align={'left'}
 									{...TypographyProps}
-									className={clx(
-										classes.msg,
-										classes[side],
-										attachClass(i),
-										TypographyProps.className
-									)}
+									className={clx(classes.text, TypographyProps.className)}
 								>
 									{msg}
 								</Typography>
