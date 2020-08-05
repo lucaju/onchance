@@ -13,7 +13,8 @@ import { yellow } from '@material-ui/core/colors';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 
-import Balloon from '../conversation/balloon/Balloon';
+// import Balloon from '../conversation/balloons/Balloon';
+import ConversationTurn from '../conversation/ConversationTurn';
 
 const useStyles = makeStyles((theme) => ({
 	main: {
@@ -58,11 +59,12 @@ const Home = () => {
 					On Chance
 				</Typography>
 
-				<Balloon
+				<ConversationTurn
 					GridContainerProps={{
 						classes: { root: classes.balloon },
 					}}
-					messages={['How randomness changes your life?']}
+					side={'left'}
+					messages={[{ text:'How randomness changes your life?' }]}
 				/>
 
 				<Typography ariant="body1" paragraph={true} className={classes.shareTechMonoFont}>
@@ -93,13 +95,13 @@ const Home = () => {
 					Who developed?
 				</Typography>
 
-				<Balloon
+				<ConversationTurn
 					GridContainerProps={{
 						classes: { root: classes.balloon },
 					}}
 					messages={[
-						'Julia Salles, PhD candidate in Communication Studies at Université du Québec à Montréal and a Lecturer at Université de Montréal.',
-						'Luciano Frizzera PhD candidate in Communication Studies at Concordia University.',
+						{ text: 'Julia Salles, PhD candidate in Communication Studies at Université du Québec à Montréal and a Lecturer at Université de Montréal.' },
+						{ text: 'Luciano Frizzera PhD candidate in Communication Studies at Concordia University.' },
 					]}
 				/>
 			</div>

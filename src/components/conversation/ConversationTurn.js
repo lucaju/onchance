@@ -7,6 +7,8 @@ import AdbIcon from '@material-ui/icons/Adb';
 import Balloon from './balloons/Balloon';
 import DebubButton from './debug/DebugButton';
 
+import { useApp } from '../../app';
+
 const useStyles = makeStyles(({ palette, spacing }) => ({
 	avatar: {
 		width: spacing(4),
@@ -16,18 +18,17 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 	},
 }));
 
-const ConversationTun = ((props) => {
-	const {
-		id,
-		avatar,
-		messages,
-		side,
-		GridContainerProps,
-		GridItemProps,
-		AvatarProps,
-	} = props;
-
+const ConversationTun = ({
+	id,
+	avatar,
+	AvatarProps,
+	GridContainerProps,
+	GridItemProps,
+	messages,
+	side,
+}) => {
 	const classes = useStyles();
+	const { state } = useApp();
 
 	return (
 		<Grid
@@ -40,7 +41,7 @@ const ConversationTun = ((props) => {
 		>
 			{side === 'left' && (
 				<Grid item {...GridItemProps}>
-					<DebubButton id={id} />
+					{state.general.debug && <DebubButton id={id} />}
 					<Avatar
 						src={avatar}
 						{...AvatarProps}
@@ -50,32 +51,37 @@ const ConversationTun = ((props) => {
 					</Avatar>
 				</Grid>
 			)}
-			<Grid item xs={side === 'right' ? 'auto' : 8} >
+			<Grid
+				item
+				container
+				xs={8}
+				justify={side === 'right' ? 'flex-end' : 'flex-start'}
+			>
 				{messages.map((msg, i) => (
-					<Balloon key={i} id={i} message={msg} side={side}/>
+					<Balloon key={i} id={i} message={msg} side={side} />
 				))}
 			</Grid>
 		</Grid>
 	);
-});
+};
 
 ConversationTun.propTypes = {
 	id: PropTypes.any,
 	avatar: PropTypes.string,
-	messages: PropTypes.arrayOf(PropTypes.object),
-	side: PropTypes.oneOf(['left', 'right']),
+	AvatarProps: PropTypes.shape({}),
 	GridContainerProps: PropTypes.shape({}),
 	GridItemProps: PropTypes.shape({}),
-	AvatarProps: PropTypes.shape({}),
+	messages: PropTypes.arrayOf(PropTypes.object),
+	side: PropTypes.oneOf(['left', 'right']),
 };
 
 ConversationTun.defaultProps = {
 	avatar: '',
-	messages: [],
-	side: 'left',
+	AvatarProps: {},
 	GridContainerProps: {},
 	GridItemProps: {},
-	AvatarProps: {},
+	messages: [],
+	side: 'left',
 };
 
 export default ConversationTun;
