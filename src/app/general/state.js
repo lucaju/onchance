@@ -1,5 +1,4 @@
 export const state = {
-	// view: 'home',
-	debug: true,
+	debug: false,
 	debugDialog: null
 };
