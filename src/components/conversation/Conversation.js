@@ -36,14 +36,12 @@ const Conversation = ({ userInputHeight }) => {
 	}, []);
 
 	const botIsTyping = (value) => {
-		console.log('heis');
 		SetBotJustTyped(value);
 	};
 
 	//update conversation
 	useLayoutEffect(() => {
 		//scroll
-		console.log('opa');
 		conversationNode.scrollTop = conversationNode.scrollHeight;
 	}, [state.conversation.log, botJustTyped]);
 

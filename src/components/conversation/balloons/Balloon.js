@@ -61,7 +61,7 @@ const Balloon = (props) => {
 	useEffect(() => {
 		const timer = setTimeout(() => setBotIsTyping(false), message.typingTime);
 		return () => {
-			isTyping(id);
+			if (isTyping) isTyping(id);
 			clearTimeout(timer);
 		};
 	}, [botIsTyping]);
