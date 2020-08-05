@@ -56,6 +56,7 @@ const SideBar = ({ sidebarWidth }) => {
 				<Conversation userInputHeight={userInputHeight} />
 				<TextField
 					// ref={(node) => (TextFieldNode = node)}
+					autoComplete="off"
 					placeholder="Type here"
 					value={userInputState}
 					id="user-input"
