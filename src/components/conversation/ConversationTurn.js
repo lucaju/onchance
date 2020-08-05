@@ -5,6 +5,7 @@ import { Avatar, Grid, makeStyles } from '@material-ui/core';
 
 import AdbIcon from '@material-ui/icons/Adb';
 import Balloon from './balloons/Balloon';
+import Narrator from './balloons/Narrator';
 import DebubButton from './debug/DebugButton';
 
 import { useApp } from '../../app';
@@ -25,10 +26,13 @@ const ConversationTun = ({
 	GridContainerProps,
 	GridItemProps,
 	messages,
-	side,
+	source,
+	isTyping,
 }) => {
 	const classes = useStyles();
 	const { state } = useApp();
+
+	const side = source === 'user' ? 'right' : 'left';
 
 	return (
 		<Grid
@@ -39,7 +43,7 @@ const ConversationTun = ({
 			alignItems="flex-end"
 			{...GridContainerProps}
 		>
-			{side === 'left' && (
+			{side === 'left' && source !== 'narrator' && (
 				<Grid item {...GridItemProps}>
 					{state.general.debug && <DebubButton id={id} />}
 					<Avatar
@@ -54,11 +58,18 @@ const ConversationTun = ({
 			<Grid
 				item
 				container
-				xs={8}
+				// xs={8}
+				xs={source === 'narrator' ? 'auto' : 8}
 				justify={side === 'right' ? 'flex-end' : 'flex-start'}
 			>
 				{messages.map((msg, i) => (
-					<Balloon key={i} id={i} message={msg} side={side} />
+					<div key={i}>
+						{source === 'narrator' ? (
+							<Narrator id={i} message={msg} />
+						) : (
+							<Balloon id={i} message={msg} side={side} isTyping={isTyping} />
+						)}
+					</div>
 				))}
 			</Grid>
 		</Grid>
@@ -72,7 +83,8 @@ ConversationTun.propTypes = {
 	GridContainerProps: PropTypes.shape({}),
 	GridItemProps: PropTypes.shape({}),
 	messages: PropTypes.arrayOf(PropTypes.object),
-	side: PropTypes.oneOf(['left', 'right']),
+	source: PropTypes.string,
+	isTyping: PropTypes.func,
 };
 
 ConversationTun.defaultProps = {
@@ -81,7 +93,7 @@ ConversationTun.defaultProps = {
 	GridContainerProps: {},
 	GridItemProps: {},
 	messages: [],
-	side: 'left',
+	source: 'bot',
 };
 
 export default ConversationTun;

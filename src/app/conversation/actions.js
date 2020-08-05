@@ -33,7 +33,10 @@ export const addBotInput = async ({ state, actions, effects }, input) => {
 		//add video to collection
 		videoTriggers.map(({ video }) => {
 			actions.videos.add(video);
-			actions.conversation.addNarratorInput(speechfyVideoMetadata(video));
+			actions.conversation.addNarratorInput({
+				text: speechfyVideoMetadata(video),
+				delay: 0,
+			});
 		});
 	}
 };
@@ -53,7 +56,7 @@ export const getInputById = ({ state }, id) => {
 	return JSON.stringify(input.data, null, 4);
 };
 
-const resetConversation = ({conversation, videos}) => {
+const resetConversation = ({ conversation, videos }) => {
 	//conversation
 	const initialInteraction = conversation.log[0];
 	conversation.log = [initialInteraction];
@@ -63,31 +66,27 @@ const resetConversation = ({conversation, videos}) => {
 };
 
 const speechfyVideoMetadata = (video) => {
-	console.log(video);
-	const msg = [
-        `Title: ${video.title}\n`,
-        `Author: ${video.author}\n`,
-        `Year: ${video.year}\n`,
-        `Genre: ${video.genre}`
-	].join('\n');
-	return msg;
+	const msg = [`Title: ${video.title}`];
+	if (video.author) msg.push(`Author: ${video.author}`);
+	if (video.year) msg.push(`Year: ${video.year}`);
+	if (video.Genre) msg.push(`Genre: ${video.Genre}`);
+	return msg.join('\n');
 };
 
 //bit typing time
 const processMessagesTiming = (messages) => {
-
 	let delay = 0;
-	const INITIAL_TIME_TYPING =  Math.random(0.2, 1) * 1000; //random between 300ms and 1 s
-	const TIME_PER_CHARACRTER =  Math.random(0.8, 1.6) * 100; //random between 300ms and 1 s
+	const INITIAL_TIME_TYPING = Math.random(0.2, 1) * 1000; //random between 300ms and 1 s
+	const TIME_PER_CHARACRTER = Math.random(0.8, 1.6) * 100; //random between 300ms and 1 s
 
 	messages = messages.map((text) => {
-		const typingTime = delay + INITIAL_TIME_TYPING + (text.length * TIME_PER_CHARACRTER); // number of characters * 20 ms
+		const typingTime = delay + INITIAL_TIME_TYPING + text.length * TIME_PER_CHARACRTER; // number of characters * 20 ms
 		const message = {
 			text,
 			typingTime,
-			delay
+			delay,
 		};
-		delay =+ typingTime;
+		delay = +typingTime;
 		return message;
 	});
 

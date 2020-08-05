@@ -34,24 +34,24 @@ const useStyles = makeStyles(({ palette, spacing }) => {
 		rightFirst: { borderTopRightRadius: radius },
 		// rightLast: { borderBottomRightRadius: radius },
 		text: {
-			fontSize: 14,
+			fontSize: '.85rem',
 			wordBreak: 'break-word',
 			// fontFamily:'Share Tech Mono',
 		},
 		loader: {
-			paddingTop: 9,
-			height: 20,
+			paddingTop: spacing(1),
+			height: spacing(2),
 		},
 	};
 });
 
 const Balloon = (props) => {
-	const { id, message, side, getTypographyProps } = props;
+	const { id, message, side, getTypographyProps, isTyping } = props;
 
 	const classes = useStyles();
 
 	const [show, setShow] = useState(false);
-	const [isTyping, setIsTyping] = useState(true);
+	const [botIsTyping, setBotIsTyping] = useState(true);
 
 	useEffect(() => {
 		const timer = setTimeout(() => setShow(true), message.delay);
@@ -59,9 +59,12 @@ const Balloon = (props) => {
 	}, [show]);
 
 	useEffect(() => {
-		const timer = setTimeout(() => setIsTyping(false), message.typingTime);
-		return () => clearTimeout(timer);
-	}, [isTyping]);
+		const timer = setTimeout(() => setBotIsTyping(false), message.typingTime);
+		return () => {
+			isTyping(id);
+			clearTimeout(timer);
+		};
+	}, [botIsTyping]);
 
 	const attachClass = () => {
 		if (id === 0) return classes[`${side}First`];
@@ -74,7 +77,7 @@ const Balloon = (props) => {
 		<div>
 			{show && (
 				<div
-					key={id}
+					id={id}
 					className={clx(
 						classes[`${side}Row`],
 						classes.box,
@@ -82,7 +85,7 @@ const Balloon = (props) => {
 						attachClass()
 					)}
 				>
-					{isTyping ? (
+					{botIsTyping ? (
 						<Loader
 							className={classes.loader}
 							type="ThreeDots"
@@ -110,6 +113,7 @@ Balloon.propTypes = {
 	message: PropTypes.object,
 	getTypographyProps: PropTypes.func,
 	side: PropTypes.oneOf(['left', 'right']),
+	isTyping: PropTypes.func,
 };
 
 Balloon.defaultProps = {
