@@ -76,11 +76,13 @@ const speechfyVideoMetadata = (video) => {
 //bit typing time
 const processMessagesTiming = (messages) => {
 	let delay = 0;
-	const INITIAL_TIME_TYPING = Math.random(0.2, 1) * 1000; //random between 300ms and 1 s
-	const TIME_PER_CHARACRTER = Math.random(0.8, 1.6) * 100; //random between 300ms and 1 s
+
+	//Average human typying speed: 1 word/600ms ; Average characters per word: 5; Average typing speed 1 character/120ms
+	const INITIAL_TIME_TYPING = Math.random(0.9, 1.5) * 1000; //random between 90ms and 150s per character | 
+	const TIME_PER_CHARACRTER = Math.random(0.9, 1.5) * 100; //random between 90ms and 150s per character | 
 
 	messages = messages.map((text) => {
-		const typingTime = delay + INITIAL_TIME_TYPING + text.length * TIME_PER_CHARACRTER; // number of characters * 20 ms
+		const typingTime = delay + INITIAL_TIME_TYPING + text.length * TIME_PER_CHARACRTER;
 		const message = {
 			text,
 			typingTime,
