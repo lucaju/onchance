@@ -58,19 +58,22 @@ const ConversationTun = ({
 			<Grid
 				item
 				container
-				// xs={8}
 				xs={source === 'narrator' ? 'auto' : 8}
 				justify={side === 'right' ? 'flex-end' : 'flex-start'}
 			>
-				{messages.map((msg, i) => (
-					<div key={i}>
-						{source === 'narrator' ? (
-							<Narrator id={i} message={msg} />
-						) : (
-							<Balloon id={i} message={msg} side={side} isTyping={isTyping} />
-						)}
-					</div>
-				))}
+				{messages.map((msg, i) => {
+					if (msg.type === 'text') {
+						return (
+							<div key={i}>
+								{source === 'narrator' ? (
+									<Narrator id={i} message={msg} />
+								) : (
+									<Balloon id={i} message={msg} side={side} isTyping={isTyping} />
+								)}
+							</div>
+						);
+					}
+				})}
 			</Grid>
 		</Grid>
 	);

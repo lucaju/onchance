@@ -60,57 +60,43 @@ const resetContexts = () => {
 
 const processResponse = (result) => {
 	//mensages
-	let messages = result.fulfillmentMessages.filter(({ message }) => message === 'text');
-	messages = messages.map(({ text }) => text.text.join(' '));
-
-	//payloads
-	let payloads = result.fulfillmentMessages.filter(({ message }) => message === 'payload');
-	payloads = payloads.map(({ payload }) => payload.fields);
-
-	//check for actions
-	const actions = checkForActions(payloads);
-
-	const dialogResult = {
-		raw: result,
-		messages,
-		payloads,
-		actions,
-	};
-
-	return dialogResult;
-};
-
-const checkForActions = (payloads) => {
-	let actions = [];
-
-	const videoTrigger = payloads.find(
-		(payload) =>
-			payload.action?.stringValue?.toLowerCase() === 'play' &&
-			payload.media?.stringValue?.toLowerCase() === 'video'
-	);
-
-	if (videoTrigger) actions = [...actions, addVideoAction(videoTrigger)];
-
-	return actions;
-};
-
-const addVideoAction = ({ filename = null, keyword = null, subject = null }) => {
-	let mode = '';
-
-	if (filename) mode = 'filename';
-	if (keyword) mode = 'keyword';
-	if (subject) mode = 'subject';
-
-	const video = getVideo({
-		mode,
-		subject: subject?.stringValue.toLowerCase(),
-		keyword: keyword?.stringValue.toLowerCase(),
-		filename: filename?.stringValue.toLowerCase(),
+	const responses = result.fulfillmentMessages.map((response) => {
+		if (response.message === 'text') {
+			return {
+				type: 'text',
+				text: response.text.text.join('')
+			};
+		}
+		if (response.message === 'payload') {
+			const res = processPayload(response.payload.fields);
+			if (res) return res;
+		}
 	});
 
 	return {
-		play: 'video',
-		mode,
-		video,
+		responses,
+		raw: result,
 	};
+};
+
+const processPayload = (payload) => {
+	if (payload.type?.stringValue?.toLowerCase() === 'video') {
+		return {
+			type: 'video',
+			data: getVideoData(payload)
+		};
+	}
+	return null;
+};
+
+const getVideoData = ({ select, source , tags }) => {
+	select = select.stringValue;
+
+	const request = { select };
+	if (select === 'source') request.source = source?.stringValue?.toLowerCase();
+	if (select === 'tags') {
+		const tagsArray = tags?.listValue?.values;
+		request.tags = tagsArray.map(({stringValue}) => (stringValue));
+	}
+	return getVideo(request);
 };

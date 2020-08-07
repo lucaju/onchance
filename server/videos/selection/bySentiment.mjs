@@ -18,5 +18,7 @@ export const bySentiment = ({ videoCollection, msg }) => {
 		sentiment > 0 ? video.sentiment >= sentiment : video.sentiment <= sentiment
 	);
 
+	if (videosAvailable.length == 0) return null;
+
 	return videosAvailable;
 };

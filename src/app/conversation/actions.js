@@ -4,7 +4,7 @@ export const addUserInput = ({ state }, input) => {
 	const dialogue = {
 		id: uuidv4(),
 		from: 'user',
-		messages: [{ text: input }],
+		responses: [{ type: 'text', text: input }],
 	};
 	state.conversation.log = [...state.conversation.log, dialogue];
 };
@@ -14,38 +14,35 @@ export const addBotInput = async ({ state, actions, effects }, input) => {
 
 	if (data.reset) resetConversation(state);
 
-	const messages = processMessagesTiming(data.messages);
+	const responses = processMessagesTiming(data.responses);
 
 	const dialogue = {
 		from: 'bot',
 		id: uuidv4(),
-		messages,
-		data,
+		responses,
+		data: data.raw,
 	};
 
 	state.conversation.log = [...state.conversation.log, dialogue];
 
-	//if actions
-	if (data.actions) {
-		// filter for video action
-		const videoTriggers = data.actions.filter(({ play }) => play === 'video');
-		if (!videoTriggers) return;
-		//add video to collection
-		videoTriggers.map(({ video }) => {
-			actions.videos.add(video);
+	//if video
+	responses.map((response) => {
+		if (response.type === 'video') {
+			response.data.delay = response.delay;
+			actions.videos.add(response.data);
 			actions.conversation.addNarratorInput({
-				text: speechfyVideoMetadata(video),
-				delay: 0,
+				text: speechfyVideoMetadata(response.data),
+				delay: response.delay,
 			});
-		});
-	}
+		}
+	});
 };
 
 export const addNarratorInput = ({ state }, input) => {
 	const dialogue = {
 		id: uuidv4(),
 		from: 'narrator',
-		messages: [input],
+		responses: [input],
 	};
 	state.conversation.log = [...state.conversation.log, dialogue];
 };
@@ -74,23 +71,36 @@ const speechfyVideoMetadata = (video) => {
 };
 
 //bit typing time
-const processMessagesTiming = (messages) => {
-	let delay = 0;
-
+const processMessagesTiming = (responses) => {
 	//Average human typying speed: 1 word/600ms ; Average characters per word: 5; Average typing speed 1 character/120ms
-	const INITIAL_TIME_TYPING = Math.random(0.9, 1.5) * 1000; //random between 90ms and 150s per character | 
-	const TIME_PER_CHARACRTER = Math.random(0.9, 1.5) * 100; //random between 90ms and 150s per character | 
+	const INITIAL_DELAY = Math.random(0.2, 0.7) * 1000; //random between 90ms and 150s per character
+	const TIME_PER_CHARACRTER = Math.random(0.9, 1.2) * 100; //random between 90ms and 120s per character
 
-	messages = messages.map((text) => {
-		const typingTime = delay + INITIAL_TIME_TYPING + text.length * TIME_PER_CHARACRTER;
-		const message = {
-			text,
-			typingTime,
-			delay,
-		};
-		delay = +typingTime;
-		return message;
+	let delay =  Math.floor(INITIAL_DELAY);
+
+	responses = responses.map((response) => {
+		if (response.type === 'text') {
+			const typingTime = Math.floor(delay + INITIAL_DELAY + (response.text.length * TIME_PER_CHARACRTER));
+			response.typingTime = typingTime;
+			response.delay = delay;
+
+			delay +=  Math.floor(INITIAL_DELAY + typingTime);
+
+			return response;
+		}
+		
+		if (response.type === 'video') {
+			const durationParts = response.data.duration.split(':').reverse();
+			const seconds = durationParts[0] * 1000; //in ms
+			const minutes = durationParts[1] * 60 * 1000; //in ms
+			const duration = minutes + seconds;
+
+			response.delay =  Math.floor(delay);
+			delay +=  Math.floor(INITIAL_DELAY + duration);
+
+			return response;
+		}
 	});
 
-	return messages;
+	return responses;
 };

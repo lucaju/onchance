@@ -1,6 +1,5 @@
-import { bySubject } from './bySubject.mjs';
-import { byKeyword } from './byKeyword.mjs';
-import { byFilename } from './byFilename.mjs';
+import { bySourceFile } from './bySourceFile.mjs';
+import { byTags } from './byTags.mjs';
 import { bySentiment } from './bySentiment.mjs';
 
-export { bySubject, byKeyword, byFilename, bySentiment };
+export { bySourceFile, bySentiment, byTags };

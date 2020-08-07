@@ -56,7 +56,7 @@ const Stage = ({ sidebarWidth }) => {
 		onTimeUpdate: onTimeUpdate,
 		onEnded: onEnded,
 		videoState: videoState,
-		file: state.videos.last?.fileName || null,
+		video: state.videos.last,
 	};
 
 	return (

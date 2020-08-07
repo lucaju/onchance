@@ -28,6 +28,7 @@ const Conversation = ({ userInputHeight }) => {
 	// bot first interaction
 	useEffect(() => {
 		actions.conversation.addNarratorInput({
+			type: 'text',
 			text: initialSpeech,
 			delay: 0,
 		});
@@ -48,7 +49,7 @@ const Conversation = ({ userInputHeight }) => {
 	return (
 		<div className={classes.root} ref={(node) => (conversationNode = node)}>
 			<Grid container direction="column" justify="flex-end" alignItems="stretch">
-				{state.conversation.log.map(({ id, from, messages }) => (
+				{state.conversation.log.map(({ id, from, responses }) => (
 					<ConversationTurn
 						key={id}
 						source={from}
@@ -57,7 +58,7 @@ const Conversation = ({ userInputHeight }) => {
 							from !== 'user' ? { classes: { root: classes.conversationTurn } } : {}
 						}
 						id={id}
-						messages={messages}
+						messages={responses}
 						isTyping={botIsTyping}
 					/>
 				))}

@@ -1,40 +1,42 @@
 import { createRequire } from 'module';
 
-import differenceBy from 'lodash/fp/differenceBy.js';
-import { bySubject, byKeyword, byFilename, bySentiment } from './selection/index.mjs';
+import { bySourceFile, byTags, bySentiment } from './selection/index.mjs';
 
 const require = createRequire(import.meta.url);
 const videoCollection = require('../../video-collection/video-collection.json');
 
 let watchedCollection = [];
 
-export const getVideo = (request) => {
+export const getVideo = ({ select, source , tags, text }) => {
+
 	let videosAvailable;
+	let selectedVideo;
 
-	const req = { ...request, videoCollection };
+	if (select === 'source') videosAvailable = bySourceFile({source, videoCollection});
+	if (select === 'tags') videosAvailable = byTags({tags, videoCollection});
+	if (select === 'sentiment') videosAvailable = bySentiment({text, videoCollection});
+	
+	if (videosAvailable === null) return { error: 'No video found' };
 
-	if (request.mode === 'subject') videosAvailable = bySubject(req);
-	if (request.mode === 'keyword') videosAvailable = byKeyword(req);
-	if (request.mode === 'sentiment') videosAvailable = bySentiment(req);
-	if (request.mode === 'filename') {
-		const video = byFilename(req);
-		if (video.error) return video;
-		watchedCollection = [...watchedCollection, video];
-		return video;
+	if (select === 'source') {
+		selectedVideo = videosAvailable;
+	} else {
+		videosAvailable = filterWatchedVideos(videosAvailable); //filter videos wathched
+		selectedVideo = randonPick(videosAvailable); //randomly select video
 	}
 
-	if (videosAvailable.length === 0) return { error: 'No video found' };
-
-	videosAvailable = filterWatchedVideos(videosAvailable); //filter videos wathched
-	const selectedVideo = randonPick(videosAvailable); //select video
-	watchedCollection = [...watchedCollection, selectedVideo]; //add video to wathed Collection
-
+	//add to watched list
+	const hasBeenWatched = watchedCollection.includes(selectedVideo);
+	if (!hasBeenWatched) watchedCollection = [...watchedCollection, selectedVideo];
+	
 	return selectedVideo;
 };
 
 const filterWatchedVideos = (videosAvailable) => {
-	const unwatchedVideos = differenceBy(watchedCollection, videosAvailable, 'subject');
-	if (unwatchedVideos.length == 0) return videosAvailable; //if all videos were watched, pick a randomly among the available videos
+	const unwatchedVideos = videosAvailable.filter((video) => {
+		if (!watchedCollection.includes(video)) return video;
+	});
+	if (unwatchedVideos.length == 0) return videosAvailable; //if all videos were watched, send all available videos back
 	return unwatchedVideos;
 };
 

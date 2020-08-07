@@ -1,13 +1,6 @@
 [{
         "id": "a5",
-        "YoutubeID": "",
-        "fileName": "a5.mp4",
-        "subject": [
-            "Artificial Intelligence"
-        ],
-        "intent": [
-            ""
-        ],
+        "source": "a5.mp4",
         "title": "How Bias is Built into Algorithms",
         "author": "Cathy O'Neil",
         "year": 2019,
@@ -15,21 +8,15 @@
         "genre": "Interview",
         "language": "English",
         "caption": "English",
-        "keywords": [
+        "tags": [
+            "Artificial Intelligence",
             "def 1",
             "general def"
         ]
     },
     {
         "id": "a6",
-        "YoutubeID": "",
-        "fileName": "a6.mp4",
-        "subject": [
-            "Artificial Intelligence"
-        ],
-        "intent": [
-            ""
-        ],
+        "source": "a6.mp4",
         "title": "How Bias is Built into Algorithms",
         "author": "Cathy O'Neil",
         "year": 2019,
@@ -37,21 +24,15 @@
         "genre": "Interview",
         "language": "English",
         "caption": "English",
-        "keywords": [
+        "tags": [
+            "Artificial Intelligence",
             "def 1",
             "general def"
         ]
     },
     {
         "id": "a7",
-        "YoutubeID": "",
-        "fileName": "a7.mp4",
-        "subject": [
-            "Artificial Intelligence"
-        ],
-        "intent": [
-            ""
-        ],
+        "source": "a7.mp4",
         "title": "How Bias is Built into Algorithms",
         "author": "Cathy O'Neil",
         "year": 2019,
@@ -59,21 +40,15 @@
         "genre": "Interview",
         "language": "English",
         "caption": "English",
-        "keywords": [
+        "tags": [
+            "Artificial Intelligence",
             "def 2",
             "general def"
         ]
     },
     {
         "id": "b5",
-        "YoutubeID": "",
-        "fileName": "b5.mp4",
-        "subject": [
-            "Artificial Intelligence"
-        ],
-        "intent": [
-            ""
-        ],
+        "source": "b5.mp4",
         "title": "How Bias is Built into Algorithms",
         "author": "Cathy O'Neil",
         "year": 2019,
@@ -81,21 +56,15 @@
         "genre": "Interview",
         "language": "English",
         "caption": "English",
-        "keywords": [
+        "tags": [
+            "Artificial Intelligence",
             "def 2",
             "general def"
         ]
     },
     {
         "id": "c1",
-        "YoutubeID": "",
-        "fileName": "c1.mp4",
-        "subject": [
-            "Artificial Intelligence"
-        ],
-        "intent": [
-            ""
-        ],
+        "source": "c1.mp4",
         "title": "How Do Algorithms Predict Criminal Behavior?",
         "author": "Myles Bess, PBS",
         "year": 2017,
@@ -103,21 +72,15 @@
         "genre": "Reportage",
         "language": "English",
         "caption": "English",
-        "keywords": [
+        "tags": [
+            "Artificial Intelligence",
             "def 1",
             "general def"
         ]
     },
     {
         "id": "d1",
-        "YoutubeID": "",
-        "fileName": "d1.mp4",
-        "subject": [
-            "Artificial Intelligence"
-        ],
-        "intent": [
-            ""
-        ],
+        "source": "d1.mp4",
         "title": "The danger of predictive algorithms in criminal justice",
         "author": "Hany Farid",
         "year": 2018,
@@ -125,21 +88,15 @@
         "genre": "TedTalk",
         "language": "English",
         "caption": "English",
-        "keywords": [
+        "tags": [
+            "Artificial Intelligence",
             "def 1",
             "general def"
         ]
     },
     {
         "id": "m1",
-        "YoutubeID": "",
-        "fileName": "m1.mp4",
-        "subject": [
-            "Artificial Intelligence"
-        ],
-        "intent": [
-            ""
-        ],
+        "source": "m1.mp4",
         "title": "Minority Report",
         "author": "Steven Spielberg",
         "year": 2002,
@@ -147,7 +104,8 @@
         "genre": "Movie",
         "language": "English",
         "caption": "English",
-        "keywords": [
+        "tags": [
+            "Artificial Intelligence",
             "predictive police",
             "movie",
             "minority report"

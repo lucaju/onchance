@@ -8,7 +8,7 @@ let player;
 
 // export default class VideoPlayer extends React.Component {
 const VideoPlayer = (props) => {
-	const { muted, file, onEnded, onTimeUpdate, videoState } = props;
+	const { muted, video, onEnded, onTimeUpdate, videoState } = props;
 	let videoNode;
 
 	useEffect(() => {
@@ -41,13 +41,15 @@ const VideoPlayer = (props) => {
 	}, [videoState]);
 
 	useEffect(() => {
-		if (!file) {
+		if (!video) {
 			player.reset();
 		} else {
-			player.src(`https://onchance.net/videos/${file}`);
-			player.play();
+			player.src(`https://onchance.net/videos/${video.source}`);
+			setTimeout(() => {
+				player.play();
+			}, video.delay);
 		}
-	}, [file]);
+	}, [video]);
 
 	useEffect(() => {
 		player.muted(muted);
@@ -65,7 +67,7 @@ const VideoPlayer = (props) => {
 
 VideoPlayer.propTypes = {
 	muted: PropTypes.bool,
-	file: PropTypes.string,
+	video: PropTypes.object,
 	onEnded: PropTypes.func,
 	onTimeUpdate: PropTypes.func,
 	videoState: PropTypes.string,
