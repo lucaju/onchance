@@ -1,7 +1,6 @@
 {
-    "action": "play",
-    "media": "video",
-    "subject": "subject",
-    "keyword": "keyword",
-    "filename": "filename.ext"
+    "type": "video",
+    "select": "tags || source",
+    "tags": ["tags1", "tag2"],
+    "source": "filename.mp4 || URL"
 }

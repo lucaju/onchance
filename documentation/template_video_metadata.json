@@ -1,17 +1,15 @@
 {
     "id": "id",
     "title": "title",
-    "fileName": "filename.ext",
-    "subjects": [
-        "subject"
-    ],
+    "source": "filename.mp4",
     "author": "author",
     "year": 2020,
     "duration": "00:01",
     "genre": "genre",
     "language": "laguage",
     "caption": "caption language",
-    "keywords": [
-        "keyword"
+    "tags": [
+        "tag1",
+        "tag2"
     ]
 }
