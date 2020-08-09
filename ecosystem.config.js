@@ -1,4 +1,4 @@
-const environment = require('.env-cmdrc.json');
+const environment = require('.env-cmdrc.js');
 
 module.exports = {
 	apps: [
