@@ -2,8 +2,8 @@
 	"env": {
 		"browser": true,
 		"es6": true,
-		"node": true,
-		"jest": true
+		"jest": true,
+		"node": true
 	},
 	"extends": ["eslint:recommended", "plugin:react/recommended", "mongodb-js/compass-plugin"],
 	"globals": {
@@ -17,16 +17,16 @@
 		"sourceType": "module"
 	},
 	"rules": {
+		"dot-notation": ["error", { "allowPattern": "." }],
+		"indent": ["warn", "tab"],
 		"linebreak-style": ["error", "unix"],
-		"quotes": [2, "single"],
+		"no-console": ["warn", { "allow": ["warn", "error", "log"] }],
 		"no-multi-spaces": 0,
 		"no-trailing-spaces": 0,
 		"no-unused-vars": 2,
-		"semi": ["error", "always"],
+		"quotes": [2, "single"],
 		"require-await": ["error"],
-		"indent": ["warn", "tab"],
-		"no-console": ["warn", { "allow": ["warn", "error", "log"] }],
-		"dot-notation": ["error", { "allowPattern": "." }],
+		"semi": ["error", "always"],
 		"space-before-function-paren": ["error", {
 			"anonymous": "always",
 			"named": "always",
