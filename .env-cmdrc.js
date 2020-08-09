@@ -23,7 +23,7 @@ module.exports = {
 	},
 	production: {
 		NODE_ENV: 'production',
-		MONGO_URI: `mongodb://${user}:${password}@localhost:27017/?authSource=admin`,
+		MONGO_URI: `mongodb://${user}:${password}@mongo:27017/?authSource=admin`,
 		DATABASE: database,
 	},
 };
