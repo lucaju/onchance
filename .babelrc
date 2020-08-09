@@ -10,7 +10,7 @@
             "proposals": true,
             "regenerator": true,
             "useESModules": true,
-            "version": "^7.10.4"
+            "version": "^7.11.0"
         }]
     ]
 }
