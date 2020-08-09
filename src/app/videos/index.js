@@ -5,5 +5,5 @@ import * as actions from './actions';
 export {
 	state,
 	actions,
-	//   effects
+	// effects
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import { derived } from 'overmind';
 
 export const state = {

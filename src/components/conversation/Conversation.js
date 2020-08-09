@@ -40,9 +40,9 @@ const Conversation = ({ userInputHeight }) => {
 		SetBotJustTyped(value);
 	};
 
-	//update conversation
+	// update conversation
 	useLayoutEffect(() => {
-		//scroll
+		// scroll
 		conversationNode.scrollTop = conversationNode.scrollHeight;
 	}, [state.conversation.log, botJustTyped]);
 

@@ -5,7 +5,7 @@ import { Drawer, Grid, makeStyles, TextField } from '@material-ui/core';
 import { useApp } from '../../app';
 import Conversation from '../conversation/Conversation';
 
-let userInputHeight = 64;
+const userInputHeight = 64;
 
 const useStyles = makeStyles((theme) => ({
 	drawerPaper: (sidebarWidth) => ({ width: sidebarWidth }),
@@ -31,7 +31,7 @@ const SideBar = ({ sidebarWidth }) => {
 	};
 
 	const handleUserTriggerInput = (event) => {
-		event.preventDefault;
+		event.preventDefault();
 		if (event.key === 'Enter') {
 			actions.conversation.addUserInput(userInputState);
 			actions.conversation.addBotInput(userInputState);

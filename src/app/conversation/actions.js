@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import { v4 as uuidv4 } from 'uuid';
 
 export const addUserInput = ({ state }, input) => {
@@ -25,7 +26,7 @@ export const addBotInput = async ({ state, actions, effects }, input) => {
 
 	state.conversation.log = [...state.conversation.log, dialogue];
 
-	//if video
+	// Check if there is other types of message
 	responses.map((response) => {
 		if (response.type === 'video') {
 			response.data.delay = response.delay;
@@ -54,11 +55,11 @@ export const getInputById = ({ state }, id) => {
 };
 
 const resetConversation = ({ conversation, videos }) => {
-	//conversation
+	// conversation
 	const initialInteraction = conversation.log[0];
 	conversation.log = [initialInteraction];
 
-	//vdeoplayer
+	// vdeoplayer
 	videos.log = [];
 };
 
@@ -70,33 +71,37 @@ const speechfyVideoMetadata = (video) => {
 	return msg.join('\n');
 };
 
-//bit typing time
+// Bot typing time
 const processMessagesTiming = (responses) => {
-	//Average human typying speed: 1 word/600ms ; Average characters per word: 5; Average typing speed 1 character/120ms
-	const INITIAL_DELAY = Math.random(0.2, 0.7) * 1000; //random between 90ms and 150s per character
-	const TIME_PER_CHARACRTER = Math.random(0.9, 1.2) * 100; //random between 90ms and 120s per character
+	// Average human typying speed: 1 word/600ms;
+	// Average characters per word: 5;
+	// Average typing speed 1 character/120ms
+	const INITIAL_DELAY = Math.random(0.2, 0.7) * 1000;
+	const TIME_PER_CHARACRTER = Math.random(0.9, 1.2) * 100;
 
-	let delay =  Math.floor(INITIAL_DELAY);
+	let delay = Math.floor(INITIAL_DELAY);
 
 	responses = responses.map((response) => {
 		if (response.type === 'text') {
-			const typingTime = Math.floor(delay + INITIAL_DELAY + (response.text.length * TIME_PER_CHARACRTER));
+			const typingTime = Math.floor(
+				delay + INITIAL_DELAY + response.text.length * TIME_PER_CHARACRTER
+			);
 			response.typingTime = typingTime;
 			response.delay = delay;
 
-			delay +=  Math.floor(INITIAL_DELAY + typingTime);
+			delay += Math.floor(INITIAL_DELAY + typingTime);
 
 			return response;
 		}
-		
+
 		if (response.type === 'video') {
 			const durationParts = response.data.duration.split(':').reverse();
-			const seconds = durationParts[0] * 1000; //in ms
-			const minutes = durationParts[1] * 60 * 1000; //in ms
+			const seconds = durationParts[0] * 1000; // in ms
+			const minutes = durationParts[1] * 60 * 1000; // in ms
 			const duration = minutes + seconds;
 
-			response.delay =  Math.floor(delay);
-			delay +=  Math.floor(INITIAL_DELAY + duration);
+			response.delay = Math.floor(delay);
+			delay += Math.floor(INITIAL_DELAY + duration);
 
 			return response;
 		}

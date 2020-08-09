@@ -26,7 +26,7 @@ Nevertheless, since the end of the 19th century, non-deterministic scientific fi
 
 On Chance is part of a research-creation thesis in communication studies aiming to explore how chatbots can be used as interaction tools for conversational documentary storytelling. A chatbot is a human-computer interaction interface that uses artificial intelligence (AI), especially in the natural language processing. In On Chance, the chatbot is an interactive tool to explore the archive material and original content.
 
-## Have it received any support?
+## Support
 
 - CAPES
 - Hexagram

@@ -1,4 +1,4 @@
 export const state = {
 	debug: false,
-	debugDialog: null
+	debugDialog: null,
 };

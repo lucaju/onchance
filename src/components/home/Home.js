@@ -12,8 +12,6 @@ import {
 import { yellow } from '@material-ui/core/colors';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
-
-// import Balloon from '../conversation/balloons/Balloon';
 import ConversationTurn from '../conversation/ConversationTurn';
 
 const useStyles = makeStyles((theme) => ({
@@ -64,10 +62,10 @@ const Home = () => {
 						classes: { root: classes.balloon },
 					}}
 					side={'left'}
-					messages={[{ text:'How randomness changes your life?' }]}
+					messages={[{ type: 'text', text: 'How randomness changes your life?' }]}
 				/>
 
-				<Typography ariant="body1" paragraph={true} className={classes.shareTechMonoFont}>
+				<Typography ariant="body1" paragraph className={classes.shareTechMonoFont}>
 					From the uncertainty about the weather to the choices we make at the supermarket, chance is constantly affecting our lives. But if we could have more data and develop more precise models and algorithms, could we predict and control future events? On Chance is a documentary chatbot exploring the philosophy and science of randomness. Have a chat about how randomness affects our lives and explore the notion of chance through conversations, movie scenes, archive material and original interviews.
 				</Typography>
 				
@@ -100,8 +98,8 @@ const Home = () => {
 						classes: { root: classes.balloon },
 					}}
 					messages={[
-						{ text: 'Julia Salles, PhD candidate in Communication Studies at Université du Québec à Montréal and a Lecturer at Université de Montréal.' },
-						{ text: 'Luciano Frizzera PhD candidate in Communication Studies at Concordia University.' },
+						{ type: 'text', text: 'Julia Salles, PhD candidate in Communication Studies at Université du Québec à Montréal and a Lecturer at Université de Montréal.' },
+						{ type: 'text', text: 'Luciano Frizzera PhD candidate in Communication Studies at Concordia University.' },
 					]}
 				/>
 			</div>
@@ -117,13 +115,13 @@ const Home = () => {
 					Tell me more about the project
 				</Typography>
 
-				<Typography variant="body1" paragraph={true}>
+				<Typography variant="body1" paragraph>
 					The development of digital technologies and access to vast amounts of data have revived the human ambition to plan and control the future. Using predictive models based on large collections of data, analysts claim to be able to reduce uncertainty and increase control over interactions with the world.
 				</Typography>
-				<Typography variant="body1" paragraph={true}>
+				<Typography variant="body1" paragraph>
 					Nevertheless, since the end of the 19th century, non-deterministic scientific fields have emerged putting randomness at the center of various theories. The development of statistical physics, quantum mechanics, molecular biology, chaos and algorithmic complexity, contributed to the questioning of the deterministic paradigm according to which all events are pre-determined by the past. On Chance addresses the apparent conflict between determinism and randomness in contemporary culture.
 				</Typography>
-				<Typography variant="body1" paragraph={true}>
+				<Typography variant="body1" paragraph>
 					On Chance is part of a research-creation thesis in communication studies aiming to explore how chatbots can be used as interactive tools for conversational documentary storytelling. A chatbot is a human-computer interaction interface that uses artificial intelligence (AI), especially in natural language processing. In On Chance, the chatbot is an interactive tool to explore the archive material and original content.
 				</Typography>
 			</div>

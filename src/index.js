@@ -8,7 +8,7 @@ import { config } from './app';
 
 const overmind = createOvermind(config, {
 	devtools: true, // defaults to 'localhost:3031'
-	logProxies: true
+	logProxies: true,
 });
 
 render(

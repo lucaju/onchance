@@ -22,25 +22,25 @@ module.exports = merge(common, {
 		usedExports: true,
 		minimize: true,
 		minimizer: [
-            new TerserPlugin({
-                cache: true, //default
-                parallel: true, // default
-                sourceMap: true //use sourceMapDevToolPlugin
-            }),
-            new OptimizeCSSAssetsPlugin({})
-        ],
+			new TerserPlugin({
+				cache: true, // default
+				parallel: true, // default
+				sourceMap: true, // use sourceMapDevToolPlugin
+			}),
+			new OptimizeCSSAssetsPlugin({}),
+		],
 	},
 	plugins: [
 		new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production') }),
 		new webpack.optimize.ModuleConcatenationPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.SourceMapDevToolPlugin({
-            filename: 'app.js.map',
-            module: true,
-            columns: true,
-            noSources: false,
-            namespace: '',
-            exclude: [/react/]
-        })
-	]
+			filename: 'app.js.map',
+			module: true,
+			columns: true,
+			noSources: false,
+			namespace: '',
+			exclude: [/react/],
+		}),
+	],
 });

@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 		left: theme.spacing(1),
 		marginBottom: theme.spacing(1),
 		backgroundColor: theme.palette.background.default,
-	}
+	},
 }));
 
 const Stage = ({ sidebarWidth }) => {
@@ -68,7 +68,7 @@ const Stage = ({ sidebarWidth }) => {
 				className={classes.soundButton}
 				onClick={handleSound}
 			>
-				{ muted ? <VolumeOffIcon /> : <VolumeUpIcon />}
+				{muted ? <VolumeOffIcon /> : <VolumeUpIcon />}
 			</Fab>
 		</Grid>
 	);
