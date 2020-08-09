@@ -31,7 +31,7 @@ const SideBar = ({ sidebarWidth }) => {
 	};
 
 	const handleUserTriggerInput = (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 		if (event.key === 'Enter') {
 			actions.conversation.addUserInput(userInputState);
 			actions.conversation.addBotInput(userInputState);
