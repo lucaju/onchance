@@ -1,6 +1,6 @@
 # OnChance
 
-FROM node:14.5.0
+FROM node:14.7.0
 
 RUN npm install pm2 -g
 
