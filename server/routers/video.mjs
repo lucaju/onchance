@@ -5,85 +5,26 @@ const router = new express.Router();
 router.use(express.json());
 
 /**
- * * GET new message to DialogFlow
+ * * GET video
  *
  * @async
  * @function
- * @param {String} req.body.msg user input
- * @returns {Object} res.body dialogflow response
+ * @param {String} req.query Query: select:STRING, tags:ARRAY, source:STRING, sentiment:NUMMBER
+ * @returns {Object} res.body Video Metadata
  * @example
  */
-router.get('/', (req, res) => {
-	if (!req.query.subject && !req.query.keyword) {
-		return res.status(400).send();
-	}
 
-	const request = {};
+router.get('/', async (req, res) => {
+	if (!req.query.select) return res.status(400).send();
 
-	if (req.query.keyword) {
-		request.mode = 'keyword';
-		request.keyword = req.query.keyword.toLowerCase();
-	}
+	const request = { select: req.query.select };
 
-	if (req.query.subject) {
-		request.mode = 'subject';
-		request.subject = req.query.subject.toLowerCase();
-	}
+	if (req.query.source) request.source = req.query.source;
+	if (req.query.tags) request.tags = req.query.tags.split(',');
 
-	const video = getVideo(request);
+	const video = await getVideo(request);
 
 	if (video.error) return res.status(404).json(video);
-
-	res.status(200).json(video);
-});
-
-router.get('/subject/:subject/:keyword', (req, res) => {
-	const request = {
-		mode: 'subject',
-		subject: req.params.subject.toLowerCase(),
-	};
-
-	if (req.params.keyword) req.params.keyword.toLowerCase();
-
-	const video = getVideo(request);
-
-	if (video.error) return res.status(404).json(video);
-
-	res.status(200).json(video);
-});
-
-router.get('/subject/:subject', (req, res) => {
-	const video = getVideo({
-		mode: 'subject',
-		subject: req.params.subject.toLowerCase(),
-	});
-
-	if (video.error) return res.status(404).json(video);
-
-	res.status(200).json(video);
-});
-
-router.get('/keyword/:keyword', (req, res) => {
-	const keyword = req.params.keyword;
-
-	const video = getVideo({
-		mode: 'keyword',
-		keyword: keyword.toLowerCase(),
-	});
-
-	if (video.error) return res.status(404).json(video);
-
-	res.status(200).json(video);
-});
-
-router.post('/bysentiment', (req, res) => {
-	const video = getVideo({
-		mode: 'sentiment',
-		msg: req.body.msg,
-	});
-
-	if (video.error) return res.status(404).json(video);
-
 	res.status(200).json(video);
 });
 

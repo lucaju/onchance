@@ -1,42 +1,47 @@
-import { createRequire } from 'module';
+/* eslint-disable no-use-before-define */
+import Video from '../models/video.mjs';
+import { getSentiment } from '../nlp/sentiment.mjs';
 
-import { bySourceFile, byTags, bySentiment } from './selection/index.mjs';
+let watchedCollection = []; // Store watched videos
 
-const require = createRequire(import.meta.url);
-const videoCollection = require('../../video-collection/video-collection.json');
-
-let watchedCollection = [];
-
-export const getVideo = ({ select, source , tags, text }) => {
-
-	let videosAvailable;
+export const getVideo = async ({ select, source, tags, text }) => {
 	let selectedVideo;
 
-	if (select === 'source') videosAvailable = bySourceFile({source, videoCollection});
-	if (select === 'tags') videosAvailable = byTags({tags, videoCollection});
-	if (select === 'sentiment') videosAvailable = bySentiment({text, videoCollection});
-	
-	if (videosAvailable === null) return { error: 'No video found' };
+	if (select === 'source') selectedVideo = await bySourceFile(source);
+	if (select === 'tags') selectedVideo = await byTags(tags);
+	if (select === 'sentiment') selectedVideo = await bySentiment(text);
 
-	if (select === 'source') {
-		selectedVideo = videosAvailable;
-	} else {
-		videosAvailable = filterWatchedVideos(videosAvailable); //filter videos wathched
-		selectedVideo = randonPick(videosAvailable); //randomly select video
-	}
+	if (!selectedVideo) return { error: 'No video found' };
 
-	//add to watched list
 	const hasBeenWatched = watchedCollection.includes(selectedVideo);
 	if (!hasBeenWatched) watchedCollection = [...watchedCollection, selectedVideo];
-	
+
 	return selectedVideo;
+};
+
+const bySourceFile = async (source) => {
+	return await Video.findOne({ source }).catch(() => undefined);
+};
+
+const byTags = async (tags) => {
+	let videosAvailable = await Video.find({ tags: { $all: tags } }).catch(() => undefined);
+	videosAvailable = filterWatchedVideos(videosAvailable); // filter videos wathched
+	return randonPick(videosAvailable); // randomly select video
+};
+
+const bySentiment = async (text) => {
+	// TO DO
+	const sentiment = getSentiment(text);
+	let videosAvailable = await Video.find({ sentiment }).catch(() => undefined);
+	videosAvailable = filterWatchedVideos(videosAvailable); // filter videos wathched
+	return randonPick(videosAvailable); // randomly select video
 };
 
 const filterWatchedVideos = (videosAvailable) => {
 	const unwatchedVideos = videosAvailable.filter((video) => {
 		if (!watchedCollection.includes(video)) return video;
 	});
-	if (unwatchedVideos.length == 0) return videosAvailable; //if all videos were watched, send all available videos back
+	if (unwatchedVideos.length === 0) return videosAvailable; // if all videos were watched, send all available videos back
 	return unwatchedVideos;
 };
 
@@ -48,5 +53,5 @@ const randonPick = (videosAvailable) => {
 const getRandomIntInclusive = (min, max) => {
 	min = Math.ceil(min);
 	max = Math.floor(max);
-	return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
+	return Math.floor(Math.random() * (max - min + 1)) + min; // The maximum is inclusive and the minimum is inclusive
 };

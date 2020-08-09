@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import dialogflow from '@google-cloud/dialogflow';
 import { v4 as uuidv4 } from 'uuid';
 import { getVideo } from '../videos/videos.mjs';
@@ -9,12 +10,10 @@ let queryParams = {};
 
 /**
  * Send a query to the dialogflow agent, and return the query result.
- * @param {string} projectId The project to be used
+ * @param {string} text text to send to dialogflow
  */
 export const sendDialog = async (text) => {
-
-	//reset context
-	queryParams = { contexts };
+	queryParams = { contexts }; // get contexts
 
 	let reset = false;
 	if (text.toLowerCase() === 'hello' || text.toLowerCase() === 'restart') reset = true;
@@ -31,24 +30,25 @@ export const sendDialog = async (text) => {
 		session: sessionPath,
 		queryInput: {
 			text: {
-				text, // The query to send to the dialogflow agent
-				languageCode: 'en-US', // The language used by the client (en-US)
+				text,
+				languageCode: 'en-US',
 			},
 		},
-		queryParams
+		queryParams,
 	};
 
-	//send request
+	// send request
 	const responses = await sessionClient.detectIntent(request);
-	const response = responses[0].queryResult;
+	const queryResult = responses[0].queryResult;
 
-	//save context
-	contexts = response.outputContexts;
+	// save context
+	contexts = queryResult.outputContexts;
 
-	const results = processResponse(response);
-	if (reset) results.reset = true;
+	// proCcess queryResult
+	const botResponse = await processQueryResults(queryResult);
+	if (reset) botResponse.reset = true; // reset context
 
-	return results;
+	return botResponse;
 };
 
 const resetContexts = () => {
@@ -58,45 +58,48 @@ const resetContexts = () => {
 	};
 };
 
-const processResponse = (result) => {
-	//mensages
-	const responses = result.fulfillmentMessages.map((response) => {
-		if (response.message === 'text') {
-			return {
-				type: 'text',
-				text: response.text.text.join('')
-			};
-		}
-		if (response.message === 'payload') {
-			const res = processPayload(response.payload.fields);
-			if (res) return res;
-		}
-	});
-
+const processQueryResults = async (queryResult) => {
+	const responses = await Promise.all(
+		queryResult.fulfillmentMessages.map((response) => proccessEachResponse(response))
+	);
 	return {
 		responses,
-		raw: result,
+		raw: queryResult,
 	};
 };
 
-const processPayload = (payload) => {
+const proccessEachResponse = async (response) => {
+	if (response.message === 'text') {
+		return Promise.resolve({
+			type: 'text',
+			text: response.text.text.join(''),
+		});
+	}
+
+	if (response.message === 'payload') {
+		const payload = await processPayload(response.payload.fields);
+		return Promise.resolve(payload);
+	}
+};
+
+const processPayload = async (payload) => {
 	if (payload.type?.stringValue?.toLowerCase() === 'video') {
 		return {
 			type: 'video',
-			data: getVideoData(payload)
+			data: await getVideoData(payload),
 		};
 	}
 	return null;
 };
 
-const getVideoData = ({ select, source , tags }) => {
+const getVideoData = async ({ select, source, tags }) => {
 	select = select.stringValue;
 
 	const request = { select };
 	if (select === 'source') request.source = source?.stringValue?.toLowerCase();
 	if (select === 'tags') {
 		const tagsArray = tags?.listValue?.values;
-		request.tags = tagsArray.map(({stringValue}) => (stringValue));
+		request.tags = tagsArray.map(({ stringValue }) => stringValue);
 	}
-	return getVideo(request);
+	return await getVideo(request);
 };
