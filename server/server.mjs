@@ -7,6 +7,7 @@ import './db/mongoDB.mjs';
 
 import dialogflow from './routers/dialogflow.mjs';
 import video from './routers/video.mjs';
+import general from './routers/general.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +25,7 @@ if (process.env.NODE_ENV === 'development') {
 // routers
 app.use('/dialogflow', dialogflow);
 app.use('/video', video);
+app.use('/general', general);
 
 // static
 app.use(express.static('./dist'));

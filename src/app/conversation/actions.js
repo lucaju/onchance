@@ -15,7 +15,7 @@ export const addBotInput = async ({ state, actions, effects }, input) => {
 
 	if (data.reset) resetConversation(state);
 
-	const responses = processMessagesTiming(data.responses);
+	const responses = processMessagesTiming(data.responses, state.general);
 
 	const dialogue = {
 		from: 'bot',
@@ -31,7 +31,8 @@ export const addBotInput = async ({ state, actions, effects }, input) => {
 		if (response.type === 'video') {
 			response.data.delay = response.delay;
 			actions.videos.add(response.data);
-			addNarratorInput({
+			actions.conversation.addNarratorInput({
+				type: 'text',
 				text: speechfyVideoMetadata(response.data),
 				delay: response.delay,
 			});
@@ -72,24 +73,30 @@ const speechfyVideoMetadata = (video) => {
 };
 
 // Bot typing time
-const processMessagesTiming = (responses) => {
+const processMessagesTiming = (responses, { settings: { bot } }) => {
 	// Average human typying speed: 1 word/600ms;
 	// Average characters per word: 5;
 	// Average typing speed 1 character/120ms
-	const INITIAL_DELAY = Math.random(0.2, 0.7) * (1000 / 2);
-	const TIME_PER_CHARACRTER = Math.random(0.9, 1.2) * (100 / 2);
+	let initialDelay = [200, 700]; // default: 200 - 700ms before start
+	let typingDelay = [90, 120]; // default: 90-120ms per character
 
-	let delay = Math.floor(INITIAL_DELAY);
+	if (bot) {
+		initialDelay = [bot.initialDelay.min, bot.initialDelay.max];
+		typingDelay = [bot.typingTimePerCharacter.min, bot.typingTimePerCharacter.max];
+	}
+
+	const INITIAL_DELAY = getRandomIntInclusive(initialDelay);
+	const TIME_PER_CHARACRTER = getRandomIntInclusive(typingDelay);
+
+	let delay = INITIAL_DELAY;
 
 	responses = responses.map((response) => {
 		if (response.type === 'text') {
-			const typingTime = Math.floor(
-				delay + INITIAL_DELAY + response.text.length * TIME_PER_CHARACRTER
-			);
-			response.typingTime = typingTime;
+			const typingTime = response.text.length * TIME_PER_CHARACRTER;
+			response.typingTime = delay + typingTime;
 			response.delay = delay;
 
-			delay += Math.floor(INITIAL_DELAY + typingTime);
+			delay += INITIAL_DELAY + typingTime;
 
 			return response;
 		}
@@ -100,12 +107,18 @@ const processMessagesTiming = (responses) => {
 			const minutes = durationParts[1] * 60 * 1000; // in ms
 			const duration = minutes + seconds;
 
-			response.delay = Math.floor(delay);
-			delay += Math.floor(INITIAL_DELAY + duration);
+			response.delay = delay;
+			delay += INITIAL_DELAY + duration;
 
 			return response;
 		}
 	});
 
 	return responses;
+};
+
+const getRandomIntInclusive = ([min, max]) => {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min; // The maximum is inclusive and the minimum is inclusive
 };
