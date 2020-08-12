@@ -73,7 +73,9 @@ const speechfyVideoMetadata = (video) => {
 };
 
 // Bot typing time
-const processMessagesTiming = (responses, { settings: { bot } }) => {
+const processMessagesTiming = (responses, state) => {
+	const {debug, settings: { bot }} = state;
+
 	// Average human typying speed: 1 word/600ms;
 	// Average characters per word: 5;
 	// Average typing speed 1 character/120ms
@@ -89,29 +91,29 @@ const processMessagesTiming = (responses, { settings: { bot } }) => {
 	const TIME_PER_CHARACRTER = getRandomIntInclusive(typingDelay);
 
 	let delay = INITIAL_DELAY;
+	let duration = 0;
 
 	responses = responses.map((response) => {
 		if (response.type === 'text') {
-			const typingTime = response.text.length * TIME_PER_CHARACRTER;
-			response.typingTime = delay + typingTime;
-			response.delay = delay;
-
-			delay += INITIAL_DELAY + typingTime;
-
-			return response;
+			duration = response.text.length * TIME_PER_CHARACRTER;
+			
+			response.typingTime = debug ? 0 : delay + duration;
+			response.delay = debug ? 0 : delay;
 		}
 
 		if (response.type === 'video') {
 			const durationParts = response.data.duration.split(':').reverse();
 			const seconds = durationParts[0] * 1000; // in ms
 			const minutes = durationParts[1] * 60 * 1000; // in ms
-			const duration = minutes + seconds;
+			
+			duration = minutes + seconds;
 
-			response.delay = delay;
-			delay += INITIAL_DELAY + duration;
-
-			return response;
+			response.delay =  debug ? 0 : delay;
 		}
+		
+		delay += debug ? 0 : INITIAL_DELAY + duration;
+
+		return response;
 	});
 
 	return responses;
