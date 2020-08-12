@@ -76,8 +76,8 @@ const processMessagesTiming = (responses) => {
 	// Average human typying speed: 1 word/600ms;
 	// Average characters per word: 5;
 	// Average typing speed 1 character/120ms
-	const INITIAL_DELAY = Math.random(0.2, 0.7) * 1000;
-	const TIME_PER_CHARACRTER = Math.random(0.9, 1.2) * 100;
+	const INITIAL_DELAY = Math.random(0.2, 0.7) * (1000 / 2);
+	const TIME_PER_CHARACRTER = Math.random(0.9, 1.2) * (100 / 2);
 
 	let delay = Math.floor(INITIAL_DELAY);
 
