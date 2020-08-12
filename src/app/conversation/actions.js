@@ -31,7 +31,7 @@ export const addBotInput = async ({ state, actions, effects }, input) => {
 		if (response.type === 'video') {
 			response.data.delay = response.delay;
 			actions.videos.add(response.data);
-			actions.conversation.addNarratorInput({
+			addNarratorInput({
 				text: speechfyVideoMetadata(response.data),
 				delay: response.delay,
 			});
@@ -67,7 +67,7 @@ const speechfyVideoMetadata = (video) => {
 	const msg = [`Title: ${video.title}`];
 	if (video.author) msg.push(`Author: ${video.author}`);
 	if (video.year) msg.push(`Year: ${video.year}`);
-	if (video.Genre) msg.push(`Genre: ${video.Genre}`);
+	if (video.genre) msg.push(`Genre: ${video.genre}`);
 	return msg.join('\n');
 };
 
