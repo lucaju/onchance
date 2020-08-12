@@ -11,6 +11,11 @@ module.exports = {
 		MONGO_URI: 'mongodb://localhost:27017/',
 		DATABASE: database,
 	},
+	servDev: {
+		NODE_ENV: 'production',
+		MONGO_URI: 'mongodb://localhost:27017/',
+		DATABASE: database,
+	},
 	development_remote_mongo: {
 		NODE_ENV: 'development',
 		MONGO_URI: `mongodb://${user}:${password}@${remoteServer}:27017/?authSource=admin`,
