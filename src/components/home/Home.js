@@ -62,11 +62,13 @@ const Home = () => {
 						classes: { root: classes.balloon },
 					}}
 					side={'left'}
-					messages={[{ type: 'text', text: 'How randomness changes your life?' }]}
+					messages={[{ type: 'text', text: 'How predictive algorithms are changing your life?' }]}
 				/>
 
 				<Typography ariant="body1" paragraph className={classes.shareTechMonoFont}>
-					From the uncertainty about the weather to the choices we make at the supermarket, chance is constantly affecting our lives. But if we could have more data and develop more precise models and algorithms, could we predict and control future events? On Chance is a documentary chatbot exploring the philosophy and science of randomness. Have a chat about how randomness affects our lives and explore the notion of chance through conversations, movie scenes, archive material and original interviews.
+					{`From the uncertainty about the weather to the people we meet, chance is constantly affecting our lives. But if we could have more data and develop more precise models and algorithms, could we predict and control future events?
+					On Chance is a chatbot documentary exploring predictive algorithms. Have a chat with Jana and collaborate with her on a story about how predictive algorithms affect our lives.
+					On Chance is best experienced on computer screens.`}
 				</Typography>
 				
 				<Button
