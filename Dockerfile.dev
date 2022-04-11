@@ -1,15 +1,15 @@
 # On Chance
 
-FROM node:14.7.0
+FROM node:16.14-alpine
 
 WORKDIR /onchance
 
 COPY . .
 
-CMD ["npm", "run", "server:dev-local-docker"]
+CMD ["npm", "run", "server:dev-remote-mongo-local-docker"]
 
-WORKDIR /onchance
-COPY . .
+# WORKDIR /onchance
+# COPY . .
 
 # # FOR DEBUG SERVR ONLY
 # RUN npm install

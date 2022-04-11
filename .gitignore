@@ -10,7 +10,7 @@ dist/
 docker/
 videos/
 Dockerfile.dev
-
+previous_versions
 
 # Runtime data
 pids
