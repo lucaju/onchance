@@ -41,7 +41,7 @@
 		"env-cmd": "^10.1.0",
 		"express": "^4.17.1",
 		"kleur": "^4.1.4",
-		"mongoose": "^6.2.10",
+		"mongoose": "^6.4.6",
 		"natural": "^5.1.13",
 		"overmind": "^28.0.1",
 		"overmind-react": "^29.0.1",
